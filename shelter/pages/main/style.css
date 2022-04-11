@@ -36,6 +36,10 @@ left: 40px;
 top: 60px;
    }
 
+.title h1 {
+    margin: 0;
+}
+
 .title h1 a{
 margin: 0;
 color: #F1CDB3;  
@@ -141,6 +145,10 @@ align-items: center;
 color: #CDCDCD;
 }
 
+.button a {
+    text-decoration: none;
+    color: #292929;
+}
 .button {
 
 background: #F1CDB3;
@@ -266,6 +274,10 @@ letter-spacing: 0.06em;
 color: #545454;
 }
 
+.button-pets a{
+    text-decoration: none;
+    color: #292929;
+}
 
 .button-pets {
 
@@ -300,14 +312,18 @@ cursor: pointer;
 .block-all-pets {
     display: flex;
     flex-direction: row;
-    gap: 90px;    
+    gap: 90px;   
 }
+.block-all-pets :hover > .button-learn-more{
+    background: #FDDCC4 ;
+} 
 
 .block-pets {
 background-color: #FAFAFA;     /* block one pet - img, name, button */
 width: 270px;
 height: 435px;
 gap: 30px;
+cursor: pointer;
 }
 
 
