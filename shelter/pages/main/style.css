@@ -92,11 +92,10 @@ margin-left: auto;
 
 }
 .nav-link:hover {
-    text-decoration: underline;
+    text-decoration: none;
     color: #ffffff;
-    text-decoration-color: #F1CDB3;
-    text-decoration-thickness: 3px;
-    text-underline-offset: 3px;
+    
+    
 }
 #about {
     font-family: 'Arial';
@@ -170,7 +169,7 @@ cursor: pointer;
 background: #FDDCC4;
 }
 
-/* About pets */
+                                                     /* About pets */
 .about-pets {
 background: #ffffff;
 height: 588px;
@@ -390,7 +389,7 @@ background: #FDDCC4;
     }
 
 
-.page-help {   /* page HELP */
+.page-help {                                                     /* page HELP */
 width: 1280px;
 height: 611px;
 background-color: #fff;
@@ -400,6 +399,7 @@ background-color: #fff;
 .help-content {
     width: 1200px;
     height: 431px;
+    margin-bottom: 0;
     margin-left: 40px;
     margin-right: 40px;
     padding-top: 80px;
@@ -409,7 +409,7 @@ background-color: #fff;
 }
 
 .head-help h3 {
-    margin-top: 20px;
+    height: 90px;
     margin-bottom: 60px;
     font-family: 'Georgia';
     font-style: normal;
@@ -421,7 +421,8 @@ background-color: #fff;
     text-align: center;
     letter-spacing: 0.06em;
     color: #545454; 
-    
+    margin-top: 0;
+    padding-top: 35px;
     justify-content: center;
 }
 
@@ -431,8 +432,8 @@ background-color: #fff;
     flex-wrap: wrap;
     justify-content: center;
     column-gap: 120px;
-    row-gap: 55px;
-
+    row-gap: 40px;
+padding-bottom: 15px;
 }
 
 .icon-block {
@@ -456,7 +457,7 @@ color: #545454;
 
 }
 
-.donation-page {    /* Donation-page */
+.donation-page {                                                /* Donation-page */
     width: 1280px;
     height: 462px;
     background: #F6F6F6;
@@ -472,16 +473,27 @@ color: #545454;
     padding-top: 80px;
 }
 
+.donation-img {
+    width: 505px;
+    height: 261px;
+    padding-bottom: 110px;
+    padding-top: 11px;
+}
+
 .donation-txt{
+    margin-top: 0;
 width: 380px;
 padding-left: 30px;
 display: flex;
 flex-direction: column;
+row-gap: 20px;
 justify-content: center;
 }
 
 .donation-h3 h3{
     margin: 0;
+  height: 90px;
+  width: 300px;
     font-family: 'Georgia';
 font-style: normal;
 font-weight: 400;
@@ -504,6 +516,8 @@ display: flex;
 align-items: center;
 letter-spacing: 0.06em;
 color: #545454;
+margin: 0;
+
 }
 
 .donation-card {
@@ -519,6 +533,8 @@ align-items: center;
 letter-spacing: 0.06em;
 color: #545454;
 height: 43px;
+width: 349px;
+margin: 0;
 justify-content: center;
 }
 
@@ -534,6 +550,7 @@ align-items: center;
 letter-spacing: 0.06em;
 color: #545454;
 height: 43px;
+margin: 0;
 justify-content: center;
 }
 
@@ -546,6 +563,7 @@ line-height: 18px;
 display: flex;
 align-items: center;
 color: #B2B2B2;
+margin: 0;
 }
  
 .footer {                                    /* footer */
