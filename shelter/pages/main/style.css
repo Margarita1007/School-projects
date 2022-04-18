@@ -1,32 +1,45 @@
 html {
 scroll-behavior: smooth;
+
+
 }
 
 body {
-    width: max-content;
+    max-width: 1280px;
+    width: auto;
     margin: auto;
     background-color: #F1CDB3;
+    display: flex;
+    flex-direction: column;
 }
 
-.startscreen {
+.startscreen{
     background-color: black;
-    background: url('../../assets/images/puppy.png') top 180px left 542px, url('../../assets/images/gradient.png');
-    background-repeat: no-repeat;
-    width: 1280px;
+    background: url('../../assets/images/gradient.png');
+    
+    background-size: cover;
     height: 908px;
+    
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+   
 
 
 }
 
 .head-block {
+width: auto;
 padding-top: 60px;
 display: flex;
 align-items: center;
+justify-content: space-between;
 margin-top: 0;
-margin-left: 40px;
-margin-right: 40px;
+margin-inline: 40px;
+height: 60px;
 
 }
+
 
 
 .logotype {
@@ -35,9 +48,20 @@ flex-direction: column;
 left: 40px;
 top: 60px;
    }
+.nav-burger {
+    display: none;
+}
+#menu_toggle {
+   display: none;
+}
+
+.logotype-burger {
+    display: none;
+}
 
 .title h1 {
     margin: 0;
+    font-size: 32px;
 }
 
 .title h1 a{
@@ -79,6 +103,8 @@ margin-left: auto;
     flex-direction: row;
     gap: 35px;
     align-items: center;
+    margin-right: 0;
+    
     
 }
 .nav-link {   
@@ -89,14 +115,18 @@ margin-left: auto;
     line-height: 160%;
     text-decoration: none;
     color: #CDCDCD;
+    margin-bottom: 0;
 
 }
 .nav-link:hover {
     text-decoration: none;
     color: #ffffff;
-    
-    
 }
+
+#burger {
+display: none;
+} 
+    
 #about {
     font-family: 'Arial';
     text-decoration: underline;
@@ -106,14 +136,25 @@ margin-left: auto;
     text-underline-offset: 3px;
 }
 
-.content {
+.content-main {
+    
+    margin-bottom: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 42px;
+    margin-inline: 40px;
+}
+
+.txt-content-main {
 display: flex;
 flex-direction: column;
-margin-left: 40px;
-margin-top: 223px;
+margin-top: 163px;
 width: 460px;
 height: 322px;
 }
+
+
 
 .not-only {
 margin-top: 0;
@@ -173,7 +214,7 @@ background: #FDDCC4;
 .about-pets {
 background: #ffffff;
 height: 588px;
-width: 1280px;
+
 }
 .content-about {
 margin: 0px 40px 100px 40px;
@@ -238,7 +279,7 @@ height: 408px;
                                         
 .page-pets {                          /* Page Pets */
 background: #F6F6F6;
-width: 1280px;
+
 height: 877px;
 }
 
@@ -248,7 +289,7 @@ padding-top: 80px;
 display: flex;
 flex-direction: column;
 align-items: center;
-width: 1200px;
+max-width: 1200px;
 height: 697px;
 gap: 60px;
 }
@@ -299,9 +340,9 @@ cursor: pointer;
     background: #FDDCC4;
 }
 
-.slider {
-    width: 1200px;
-    height: 435px;
+.slider-pets {
+    
+   height: 435px; 
     display: flex;
     flex-direction: row;
     gap: 52px;
@@ -350,6 +391,7 @@ margin: 30px 0;
 
 .button-left-right {
 border: 2px solid #F1CDB3;
+background: #F6F6F6;
 box-sizing: border-box;
 border-radius: 100px;
 width: 52px;
@@ -390,16 +432,16 @@ background: #FDDCC4;
 
 
 .page-help {                                                     /* page HELP */
-width: 1280px;
-height: 611px;
+
+
 background-color: #fff;
 
 }
 
 .help-content {
-    width: 1200px;
+    
     height: 431px;
-    margin-bottom: 0;
+    margin-bottom: 100px;
     margin-left: 40px;
     margin-right: 40px;
     padding-top: 80px;
@@ -454,17 +496,21 @@ align-items: center;
 text-align: center;
 letter-spacing: 0.06em;
 color: #545454;
-
 }
 
+.icon img {
+    float: bottom;
+}
+
+
 .donation-page {                                                /* Donation-page */
-    width: 1280px;
+    
     height: 462px;
     background: #F6F6F6;
 }
 
 .donation-content {
-    width: 915px;
+    max-width: 915px;
     height: 282px;
     display: flex;
     flex-direction: row-reverse;
@@ -567,27 +613,33 @@ margin: 0;
 }
  
 .footer {                                    /* footer */
-width: 1280px;
+
 height: 350px;
-background: url('../../assets/images/footer-puppy.png') top 40px left 940px, url('../../assets/images/footer-gradient-background.png');
+background: url('../../assets/images/footer-gradient-background.png');
 background-repeat: no-repeat;
+
+
 
 }
 
 .footer-elements {
-    margin-left: 40px;
-   padding-top: 56px;
+    max-width: 1300px;
+   margin: 40px 40px 0 40px;
    display: flex;
    flex-direction: row;
+   gap: 160px;
    
 }
+
 
 .footer-contacts {
     width: 279px;
     height: 234px;
-    padding-right: 160px;
     display: flex;
     flex-direction: column;
+    padding-top: 16px;
+    padding-bottom: 60px;
+    gap: 40px;
     
 }
 
@@ -597,15 +649,22 @@ height: 234px;
 display: flex;
 flex-direction: column;
 justify-content: left;
+padding-top: 16px;
+gap: 33px;
 
 }
 
-.footer-title
-{
+.footer-title {
     margin-left: 0;
 }
+
+.footer-txt {
+    display: flex;
+    align-items: center;
+}
+
 .footer-title h3{
-    margin-top: 0;
+    margin: 0;
     font-family: 'Georgia';
 font-style: normal;
 font-weight: 400;
@@ -614,7 +673,11 @@ line-height: 130%;
 letter-spacing: 0.06em;
 color: #FFFFFF;
 display: flex;
-    
+ 
+}
+
+.footer-txt p {
+    margin: 0;
 }
 
 .footer-txt p a{
@@ -626,29 +689,606 @@ font-size: 20px;
 line-height: 115%;
 letter-spacing: 0.06em;
 color: #F1CDB3;
+}
+
+
+@media screen and (max-width: 1279.98px) {  /* media запросы  */
+
+    body {
+        width: 100%;
+    }
+
+    .startscreen {
+        display: flex;
+
+        height: 1165px;
+    
+    }
+
+    .head-block {
+        margin-inline: 30px;
+        padding-top: 30px;
+    }
+
+    .content-main {
+        margin-top: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 1015px;
+        gap: 100px;
+    }
+
+    .txt-content-main {
+        margin-top: 0;
+
+    }
+
+    .txt-content-main a{
+        
+        display: inline-block;
+        align-self: center;
+    }
+
+    .img-dog {
+        align-self: flex-end;
+    }
+
+    .img-dog img {
+    
+    height: 593px;
+    float: right;
+    }
+
+
+    .about-pets {
+        height: 1048px;
+    }
+
+    .content-about {
+        flex-direction: column;
+        align-items: center;
+        gap: 80px;
+        }
+
+        .txt-about-pets {
+            margin: 0;
+            padding-top: 0%;
+        }
+
+    .pets-content {
+        margin-inline: 30px;
+    }
+
+    .block-pets:nth-child(3) {
+        display: none;
+    }
+
+    .slider-pets {
+        gap: 12px;
+
+    }
+
+    .block-all-pets {
+        gap: 40px;
+    }
+
+    .page-help {
+        height: 779px;
+    }
+
+    .help-content {
+        margin-inline: 69px;
+        height: 599px;
+
+    }
+
+    .icon-block {
+        height: 113px;
+        gap: 30px;
+    }
+
+
+    .list-help {
+        height: 449px;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-rows: 1fr 1fr 1fr;
+        grid-column-gap: 60px;
+        grid-row-gap: 55px;
+        padding-bottom: 0;
+    }
+
+    .icon-txt p{
+        margin: 0;
+    }
+
+    .head-help h3 {
+        padding-top: 0;
+    }
+    
+    .donation-page {
+        height: 783px;
+    }
+    .donation-content {
+        height: 603px;
+        flex-direction: column;
+        gap: 60px;
+        justify-content: center;
+        justify-self: center;
+        align-items: center;
+    }
+    .donation-txt {
+        padding-left: 0;
+    }
+
+    .donation-img {
+        padding-bottom: 0;
+        padding-top: 0;
+    }
+
+    .footer {
+        height: 639px;
+        background-size: cover;
+    }
+
+    .footer-elements {
+        max-width: 1000px;
+        flex-wrap: wrap;
+        row-gap: 65px;
+        column-gap: 60px;
+        justify-content: center;
+        margin: 30px 30px auto 30px;
+    }
+    .footer-contacts, .footer-location {
+        padding-bottom: 0;
+        padding-top: 0;
+    }
+    .footer-puppy img {
+        float: bottom;
+    }
+}
+
+    @media screen and (max-width: 767px) {       /* медиа запрос 320-768 */
+
+    body {
+        width: 100%;
+    }
+
+    .startscreen {
+        display: flex;
+        height: 823px;
+        }
+
+    .head-block {
+    margin-left: 10px;
+    margin-right: 53px;
+    }
+
+    .nav {
+        display: none;
+    }
+
+    #burger {
+        position: relative;
+        top: 0;
+        right: 0;
+        float: right;
+        display: block;
+        color: #F1CDB3;
+        text-decoration: none;
+        font-size: 32px;
+        }
+ /*
+    nav {
+        width: 100%;
+        height: 100px;
+    }
+
+    .nav-list.responsive {
+        position: relative;
+    }
+    #burger.responsive {
+        position: absolute;
+        top: 0;
+        right: 0;
+    }
+
+    .nav-link.responsive a {
+        float: none;
+        display: block;
+        text-align: center;
+    }
+*/
+
+.content-main {
+    margin-top: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 673px;
+    margin-inline: 10px;
+    gap:105px;
+ }
+
+.txt-content-main {
+    margin-top: 0;
+    width: 100%;
+    height: 296px;
+    gap: 42px;
+}
+
+.txt-content-main a{
+    
+    display: inline-block;
+    align-self: center;
+}
+
+.not-only {
+    font-size: 25px;
+    justify-items: center;
+    padding-bottom: 0;
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+    letter-spacing: 0.06em;
+    width: auto;
 
 }
-#first-adress{
-    display: flex;
-    justify-content: left;
+
+.txt {
+    display: block;
+    margin: 0 auto;
+    padding-bottom: 0;
+    text-align: center;
 }
-#first-adress p {
-margin: 10px auto;
+.txt p {
+    text-align: center;
 }
-#second-adress{
-    display: flex;
-    justify-content: left;
+
+
+.img-dog {
+    align-self: flex-end;
 }
-#second-adress p {
-    margin-bottom: 0;
+
+.img-dog img {
+height: 271.77px;
+float: bottom;
 }
-#mail {
+
+.about-pets {
+    height: 974px;
+}
+
+.content-about {
+    flex-direction: column;
+    align-items: center;
+    height: 890px;
+    margin: 42px 10px;
+    padding-top: 0;
+    padding-bottom: 0;
+    gap: 42px;
+    }
+
     
-    display: flex;
-    justify-content: left;
+    .about-h3 {
+        width: 100%;
+        font-size: 25px;
+        text-align: center;
+        display: block;
+        margin: auto;
+    }
+    .about-p1, .about-p2 {
+        margin-bottom: 22px;
+        margin-inline: 15px;
+        text-align: justify;
+    }
+    .txt-about-pets {
+        width: auto;
+        height: 494px;
+        margin: 0;
+        padding-top: 0%;
+    }
+    .img-about img{
+        height: 353.6px;
+        width: 260px;
+        }
+    .img-about {
+        width: auto;
+        height: auto;
+        justify-items: center;
+    }
+.page-pets {
+    height: 791px;
 }
-#phone {
-    
+
+.pets-content {
+    margin: 42px 10px;
+    padding-top: 0;
+    gap: 42px;
+}
+
+.pets-h3 {
+    font-size: 25px;
+    width: 100%;
+    height: 64px;
+    text-align: center;
+}
+.head-pets {
+    height: 64px;
+}
+
+.block-pets:nth-child(2) {
+    display: none;
+}
+.slider-pets {
+    height: auto;
+    display: grid;
+    height: auto;
+    row-gap: 20px;
+    column-gap: 0;
+   
+grid-template-areas: 
+"A A"
+"B C" ;
+}
+
+.block-all-pets {
+    grid-area: A;
+}
+
+.button-left-right .button-left {
+    grid-area: B;
+}
+.button-left-right .button-right {
+    grid-area: C;
+}
+
+.button-left-right {
+    justify-self: center
+}
+
+.page-help {
+    height: 745px;
+}
+.help-content {
+    margin: 0;
+    margin-inline: 0;
+    height: 100%;
+    width: 100%;
+    padding-top: 0;
+}
+.head-help h3 {
+font-size: 25px;
+height: 64px;
+margin-bottom: 42px;
+}
+.icon-block {
+    height: 87px;
+    gap: 20px;
+}
+.icon-txt p {
+    font-size: 15px;
+}
+.icon img {
+    height: 50px;
+    width: 50px;
+}
+
+.list-help {
+    height: 555px;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    grid-column-gap: 30px;
+    grid-row-gap: 30px;
+   padding: 0 4.6875%;
+
+}
+
+.donation-page {
+    height: 542.2px;
+}
+.donation-content {
+    margin: 42px 10px;
+    height: auto;
+    gap: 42px;
+    padding-top: 0;
+}
+.donation-txt {
+    width: 100%;
+    align-items: center;
+    margin: 0 10px;
+}
+
+.donation-h3 h3{
+    display: block;
+    font-size: 25px;
+    height: 64px;
+}
+.donation-h3 {
+    text-align: center;
+}
+.donation-h5 h5{
+    letter-spacing: 0;
+    height: 24px;
+   
+   
+}
+.donation-h5 {
+    text-align: center;
+   
+}
+.donation-card a{
+font-size: 15px;
+}
+.donation-card {
+   width: 281px;
+}
+.donation-p {
+    margin: 0 10px;
+    text-align: justify;
+}
+
+.donation-img img {
+    width: 260px;
+}
+.donation-img {
+    width: 100%;
+    height: auto;
     display: flex;
-    justify-content: left;
+    justify-content: center;
+}
+.footer {
+height: 809px;
+}
+
+.footer-elements {
+    margin: 30px 10px 0 10px;
+    flex-direction: column;
+    gap: 40px;
+    justify-content: center;
+}
+.footer-contacts {
+width: 100%;
+height: 208px;
+gap: 40px;
+justify-content: center ;
+align-self: center;
+align-items: center;
+}
+.footer-location {
+    width: 100%;
+height: 222px;
+gap: 40px;
+
+}
+.footer-title {
+    width: 92.667%;
+    margin: 0 auto;
+    justify-content: center;
+    align-items: center;
+}
+
+.footer-title h3{
+    display: block;
+font-size: 25px;
+text-align: center;
+justify-content: center;
+align-items: center;
+}
+.footer-title h3 br{
+    display: none;
+}
+.footer-txt p {
+    display: block;
+    text-align: center;
+}
+
+#first-adress, #second-adress {
+    text-align: start;
+}
+
+.footer-puppy img{
+width: 260px;
+height: 269px;
+}
+
+.footer-puppy {
+    height: 269px;
+    width: 260px;
+    display: block;
+    align-items: center;
+    margin: 0 auto;
+}
+
+
+                    /* Gamburger version2 */
+
+#menu_toggle {
+    opacity: 0;
+}
+.menu_btn {
+    display: flex;
+    align-items: center;
+    position: fixed;
+    top: 49px;
+    right: 53px;
+    width: 30px;
+    height: 22px;
+    cursor: pointer;
+    z-index: 1;
+}
+.menu_btn > span,
+.menu_btn > span::before,
+.menu_btn > span::after {
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background-color: #F1CDB3;
+}
+
+.menu_btn > span::before {
+    content: '';
+    top: -8px;
+}
+
+.menu_btn > span::after {
+   content: '';
+   top: 8px; 
+}
+
+.nav-burger {
+    display: block;
+    position: fixed;
+    visibility: hidden;
+    top: 0;
+    right: -100%;
+    width: 320px;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    text-align: center;
+    background-color:#292929;
+    box-shadow: 1px 0px 6px rgba(0,0,0,.2);
+}
+
+.nav-list {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    padding: 248px 0;
+}
+.nav-link {
+    font-size: 32px;
+    font-weight: 400;
+}
+
+#menu_toggle:checked ~ .menu_btn {
+    transform: rotate(90deg);
+}
+
+#menu_toggle:checked ~ .nav-burger {
+    visibility: visible;
+    right: 0;
+}
+#menu_toggle:checked ~ .nav-link {
+    visibility: visible;
+    display:block;
+    position: absolute;
+    z-index: 1;
+}
+
+#menu_toggle:checked ~ .logotype-burger {
+    display:block;
+    position: absolute;
+    top: 30px;
+    right: 125px;
+    z-index: 1;
+}
+
+
 }
