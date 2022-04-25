@@ -1183,12 +1183,17 @@ align-items: center;
 .footer-title h3 br{
     display: none;
 }
+
+.footer-txt {
+    justify-content: center;
+}
 .footer-txt p {
     display: block;
     text-align: center;
+    justify-content: flex-start;
 }
 
-#first-adress, #second-adress {
+#first-adress,  #second-adress {
     text-align: start;
 }
 
@@ -1220,7 +1225,7 @@ height: 269px;
     width: 30px;
     height: 22px;
     cursor: pointer;
-    z-index: 1;
+    z-index: 100;
 }
 .menu_btn > span,
 .menu_btn > span::before,
@@ -1283,7 +1288,7 @@ height: 269px;
     visibility: visible;
     display:block;
     position: absolute;
-    z-index: 3;
+    z-index: 300;
 }
 
 #menu_toggle:checked ~ .logotype-burger {
@@ -1291,7 +1296,7 @@ height: 269px;
     position: absolute;
     top: 30px;
     right: 60px;
-    z-index: 4;
+    z-index: 400;
 }
 
 .menu_btn  {
@@ -1545,6 +1550,7 @@ gap:5px;
         width: 240px;
         height: 341px;
         display: block;
+        overflow: scroll;
     }
 
    .modal-content {
