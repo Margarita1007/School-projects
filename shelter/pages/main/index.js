@@ -22,6 +22,7 @@
   
   const closeMenu = () => {
     document.querySelector("#menu_toggle").checked = false;
+
     document.querySelector(".blackout-overlay").classList.remove("blackout-overlay-on");
     document.querySelector(".logotype").classList.remove("hidden");
     document.body.classList.remove('scroll-off');
@@ -31,6 +32,11 @@
   MENU_BTN.addEventListener("click", hiddenLogo);
 
   overlay.addEventListener("click", closeMenu);
+
+  document.querySelectorAll(".nav-link").forEach(elem =>  elem.addEventListener("click", event  => {
+    closeMenu();
+  }))
+
 
 //////////////////////////////////////////////////////////////
 
@@ -83,13 +89,16 @@ const closeModal = () => {
 }))
 
 
-document.querySelectorAll("body").forEach(elem =>  elem.addEventListener("click", event  => {
+/*document.querySelectorAll("body").forEach(elem =>  elem.addEventListener("click", event  => {
 
   const $target = event.target;
   const $currentTarget = event.currentTarget;
   console.log($target)
   console.log($currentTarget);
-}))
+})) */
+
+
+
 
 
 

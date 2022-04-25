@@ -1183,12 +1183,17 @@ align-items: center;
 .footer-title h3 br{
     display: none;
 }
+
+.footer-txt {
+    justify-content: center;
+}
 .footer-txt p {
     display: block;
     text-align: center;
+    justify-content: flex-start;
 }
 
-#first-adress, #second-adress {
+#first-adress,  #second-adress {
     text-align: start;
 }
 

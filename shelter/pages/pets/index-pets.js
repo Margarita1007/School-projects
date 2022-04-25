@@ -82,7 +82,9 @@ const closeModal = () => {
   
 }))
 
-
+document.querySelectorAll(".nav-link").forEach(elem =>  elem.addEventListener("click", event  => {
+  closeMenu();
+}))
 
 
 document.querySelectorAll("body").forEach(elem =>  elem.addEventListener("click", event  => {
@@ -94,4 +96,4 @@ document.querySelectorAll("body").forEach(elem =>  elem.addEventListener("click"
   
 }))
 
-console.log(document.querySelectorAll(".block-pets"))
+console.log(document.querySelectorAll(".block-pets")) 
