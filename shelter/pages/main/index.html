@@ -13,7 +13,7 @@
   </head>
 
   <body> 
-
+      
     <div class="startscreen" id="startscreen">
        <header class="head-block">
           <div class="logotype"> 
@@ -31,6 +31,8 @@
                     <div class="title"><h1><a href="#startscreen">Cozy House</a></h1> </div>
                     <div class="subtitle"><p>Shelter for pets in Boston</p> </div>
                  </div>
+
+                 <div class="blackout-overlay"> </div>
 
                 <nav class="nav-burger">
                  <div class="nav-list" id="myTopnav">
@@ -82,29 +84,62 @@
                <h3 class="pets-h3">Our friends who <br>are looking for a house</h3>
            </div>
            <div class="slider-pets">
-               <button class="button-left-right" class="button-left">⟵</button>
-                <div class="block-all-pets">
-                    <div class="block-pets" class="block-Katrine">
+               <button class="button-left-right" class="button-left" id="btn-left">⟵</button>
+               
+
+               <div class="block-all-pets" id="carousel">
+                    <div class="block-pets" class="block-Katrine" id="item-left">
                           <div class="img-pets"> <img src='../../assets/images/pets-katrine.png' alt="Katrine"> </div>
                            <p class="name-pets" class="name-Katrine">Katrine</p>
                            <button class="button-learn-more">Learn more</button>
                       </div>
-                     <div class="block-pets" class="block-Jennifer">
+                     <div class="block-pets" class="block-Jennifer" id="item-active">
                         <div class="img-pets"> <img src='../../assets/images/pets-jennifer.png' alt="Jennifer"> </div>
                          <p class="name-pets" class="name-Jennifer">Jennifer</p>
                          <button class="button-learn-more">Learn more</button>
                      </div>
-                     <div class="block-pets" class="block-Woody">
+                     <div class="block-pets" class="block-Woody" id="item-right">
                         <div class="img-pets"> <img src='../../assets/images/pets-woody.png' alt="Woody"> </div>
                          <p class="name-pets" class="name-Woody">Woody</p>
                          <button class="button-learn-more">Learn more</button>
                       </div>
                  </div>
-                <button class="button-left-right" class="button-right">⟶</button>
+
+<!--
+                 <div class="block-all-pets" id="carousel">
+                     <div class = "block-left-pets"  id="item-left">
+                    <div class="block-pets" class="block-Katrine" >
+                          <div class="img-pets"> <img src='../../assets/images/pets-katrine.png' alt="Katrine"> </div>
+                           <p class="name-pets" class="name-Katrine">Katrine</p>
+                           <button class="button-learn-more">Learn more</button>
+                      </div>
+                     </div>
+                     <div class = "block-active-pets"  id="item-active">
+                     <div class="block-pets" class="block-Jennifer" id="item-active">
+                        <div class="img-pets"> <img src='../../assets/images/pets-jennifer.png' alt="Jennifer"> </div>
+                         <p class="name-pets" class="name-Jennifer">Jennifer</p>
+                         <button class="button-learn-more">Learn more</button>
+                     </div>
+                     </div>
+                     <div class = "block-right-pets"  id="item-right">
+                     <div class="block-pets" class="block-Woody" id="item-right">
+                        <div class="img-pets"> <img src='../../assets/images/pets-woody.png' alt="Woody"> </div>
+                         <p class="name-pets" class="name-Woody">Woody</p>
+                         <button class="button-learn-more">Learn more</button>
+                      </div>
+                     </div>
+                 </div>
+
+                -->
+
+                <button class="button-left-right" class="button-right" id="btn-right">⟶</button>
            </div>
            <a href="../pets/index.html"><button class="button-pets" >Get to know the rest</button></a>
        </div>
-   </div> <!--end page pets-->
+   </div>
+  
+
+   <!--end page pets-->
 
    <div class="page-help" id="page-help">
         <div class="help-content">
@@ -212,6 +247,11 @@
         </div>
        </div>
    </footer>
+
         <script src="script.js"></script>
+        <script src="script-slider.js"></script>
+        <script src="popup.js"></script>
+        <script src="index.js"></script>
+
   </body>
 </html> 
