@@ -63,6 +63,7 @@
 
   const modal = $.modal(options);
   modal.open();
+  document.body.classList.add('scroll-off');
   console.log(dataPetsFilter[0].img);
 
   const BTN_CLOSE = document.querySelector(".modal-close");
@@ -83,3 +84,14 @@ const closeModal = () => {
 
 
 
+
+document.querySelectorAll("body").forEach(elem =>  elem.addEventListener("click", event  => {
+
+  const $target = event.target;
+  const $currentTarget = event.currentTarget;
+  console.log($target)
+  console.log($currentTarget);
+  
+}))
+
+console.log(document.querySelectorAll(".block-pets"))

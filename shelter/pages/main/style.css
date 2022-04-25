@@ -1383,12 +1383,15 @@ height: 269px;
     
 
   .modal-window {
-      position: relative;
-      width: 70.3125%;
-      border-radius: 5px;
-      height: 500px;
-      margin: 100px auto;
-      background: #FFF;
+   
+    position: absolute;
+    top: 0; left: 0; bottom: 0; right: 0;
+     /* width: 70.3125%;
+        height: 57.01%; */
+    
+    
+      margin: auto;
+      align-self: center;
   }
 
  .modal-close {
@@ -1415,30 +1418,37 @@ font-size: 25px;
  }
 
  .modal-body {
-     position: relative;
+     position: absolute;
+     top: 0; left: 0; bottom: 0; right: 0;
+     margin: auto;
     display: flex;
     flex-direction: row;
-    height: 100%;
+    width: 900px;
+    height: 500px;
+   gap: 10px;
+   background: #FFF;
+   border-radius: 5px;
  }
  .modal-content {
      display: flex;
      flex-direction: column;
      position: absolute;
     
-     right: 20px;
+     right: 2.2%;
      width: 39%;
+     height: 72.4%;
      
  }
  .modal-img {
      justify-content: flex-start;
-     height: 100%;
+     
      width: auto;
  }
 
  .modal-content h1 {
    
-    width: 145px;
-    height: 45px;
+    
+    
   /*  position: absolute;
     left: 1px;
     top: 0px; */
@@ -1489,10 +1499,74 @@ font-size: 25px;
  }
  
  .modal-content p {
-     height: 102px;
+     
      margin-bottom: 40px;
  }
 
  .modal-content ul {
   margin-top: 0;
+}
+
+@media screen and (max-width: 1279.98px) {
+
+    .modal-body {
+        width: 630px;
+        height: 350px;
+    }
+.modal-content h1 {
+    margin-top: 10px;
+}
+.modal-content h3 {
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+.modal-content p {
+    margin-bottom: 20px;
+    font-size: 13px;
+}
+.modal-content ul {
+gap:5px;
+}
+ 
+
+    
+
+
+    
+}
+
+@media screen and (max-width: 767.5px) {
+    .modal-img {
+        display: none;
+    }
+
+    .modal-body {
+        width: 240px;
+        height: 341px;
+        display: block;
+    }
+
+   .modal-content {
+       width: auto;
+       margin: 10px;
+   }
+
+.modal-content h1 {
+    margin-top: 10px;
+}
+.modal-content h3 {
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+.modal-content p {
+    margin-bottom: 20px;
+    font-size: 13px;
+}
+.modal-content ul {
+gap:5px;
+}
+  
+
 }
