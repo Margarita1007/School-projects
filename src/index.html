@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online store</title>
+    <link href="https://faviconka.ru/ico/1/faviconka.ru_1_125443.ico" rel ="icon" type="image/x icon">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300|Sonsie+One" rel="stylesheet" type="text/css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="wrapper">
+  <header class="wrapper-header">
+    <div class="first-line">
+    <div class="logo"> 
+        <img src='./icons/logo.png' alt="logo">
+    </div>
+    
+    <nav class="nav">
+        <div class="nav-list" id="myTopnav">
+        <a href="../main/index.html#startscreen" class="nav-link" id="about">Home</a>
+        <a href="../main/index.html#page-help" class="nav-link">About</a>
+        <a href="#footer" class="nav-link">Contacts</a>
+        </div>
+    </nav>
+
+    <div class="cart">
+        <img class="img-cart" src='./icons/cart.png' alt="cart">
+    </div>
+    </div>
+
+    <div class="header-title"> 
+        <h1> Home / Products</h1>
+    </div>
+  </header>
+  <main class="wrapper-main"> 
+    <div class="main-filter"></div>
+    <div class="main-cards">
+         
+    </div>
+  </main> 
+  <footer></footer>
+</div>
+
+<template id="templ-card">
+    <div class="card">
+        <div class="card__photo">
+            <img class="card__photo_img" src="" alt="card">
+        </div>
+        <div class="card__description">
+            <p class="card__description_name"></p>
+            <p class="card__description_price"></p>
+            <button class="add" data-id="1">
+                <img class="add-img" src="./icons/cart.png">
+            </button>
+        </div>
+    </div>
+</template>
+
+<template id="templ-popup">
+    <div class="modal-overlay">
+        <div class="modal-window">
+          <div class="modal-body">
+             <button class="modal-close">
+               &times;
+             </button>  
+      
+              <img class="modal__img" src=${options.imgsrc} alt="${options.article}">
+              <div class="modal__content" id='picture'>
+                   <h1 class='modal__content_name'>${options.name}</h1>
+                    <h3> Price: $${options.price}</h3>
+                    <h5> <b>Theme:</b> ${options.theme} </h5> 
+                    <h5> <b>Modules:</b> ${options.modules} </h5>
+                    <h5> <b>Width: </b> ${options.modules} cm </h5>
+                    <h5> <b>Height: </b> ${options.height} cm </h5>
+              </div>
+          </div>
+          <button class="modal-add" data-id="modal-add">Buy</button>
+         </div>
+       </div>
+</template>
+
+</body>
+</html>

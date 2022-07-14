@@ -1,0 +1,134 @@
+.first-line {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    height: 100px;
+    margin: 0;
+   
+}
+
+.logo img {
+    height: 100%;
+}
+
+.nav {
+    display: flex;
+    align-items: center;
+}
+
+.nav-list {
+    list-style: none; 
+    display: flex;  
+    flex-direction: row;
+    gap: 20px;
+    align-items: center;
+}
+
+.nav-link {   
+    font-family: 'Ubuntu', sans-serif;
+    text-decoration: none;
+    color: #4f4f4f;
+
+}
+.nav-link:hover {
+   font-weight: bold;
+}
+
+.img-cart {
+    height: 50%;
+    display: block;
+    padding: 25px;
+}
+
+.header-title {
+    height: 50px;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #7ccbc8;
+    background-size: cover;
+    font-family: 'Ubuntu', sans-serif;
+    text-align: center;
+}
+
+.header-title h1 {
+    margin: 0;
+}
+
+.main-cards {
+    padding-top: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    row-gap: 30px;
+    column-gap: 3%;
+    justify-content: space-between;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    box-shadow: 0 0 1em rgba(0, 0, 0, .8);
+    transition: 0.3s;
+} 
+
+.card:hover {
+    box-shadow: 0 0 1em rgba(124, 203, 200, .8);
+    transform: scale(1.05);
+}
+
+.card__photo {
+    display: flex;
+    box-sizing: content-box;
+}
+
+.card__photo_img {
+    width: 100%;
+}
+
+.card__description {
+    display: grid;
+    grid-template-areas: 
+    "A A"
+    "B C";
+    grid-template-columns: 1fr 1fr;
+    font-family: 'Ubuntu', sans-serif;
+}
+
+.card__description_name {
+    grid-area: A;
+    text-align: center;
+    margin: 5% 0 0 0; 
+}
+
+.card__description_price {
+    grid-area: B;
+    text-align: start;
+    margin: 5% 0 5% 10%;
+}
+
+.add {
+    grid-area: C;
+    border-radius: 35px;
+    border: 1px solid #7ccbc8;
+    width: 35px;
+    height: 35px;
+    align-self: center;
+    justify-self: end;
+    margin-right: 10%;
+    background-color: #7ccbc8;
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 1em;
+    margin: 0 10% 5% 0;
+}
+
+.add:hover {
+    cursor: pointer;
+    background-color: aquamarine;
+}
+
+.add-img {
+    width: 25px;
+    float: right;
+}
