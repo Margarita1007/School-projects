@@ -7,9 +7,10 @@ export type Options = {
     height?: number;
     imgsrc?: string;
     price?: number;
+    stock?: number;
 }
 
-export type Data = [{
+export type Data = {
     article?: string;
     name: string;
     theme?: string;
@@ -18,6 +19,7 @@ export type Data = [{
     height?: number;
     imgsrc: string;
     price: number;
-}]
+    stock?: number;
+}
 
 export type CBGeneric<T> = (data: T) => void;

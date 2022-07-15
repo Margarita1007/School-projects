@@ -1,59 +1,30 @@
 import './style.css';
 import './style-popup.css';
-import { Data, Options } from '../src/types/types';
+//import { Options } from '../src/types/types';
 import DataLoader from './data-loader';
-import Popup from './popup';
+//import Popup from './popup';
 import Card from './card';
-import Cart from './cart';
 
 const load = new DataLoader({});
 const cards = new Card();
 
-load.getData()
-    .then((data) => cards.createCard(data))
-    .then(() => {
-        document.querySelectorAll('.card').forEach((elem) => {
-            elem.addEventListener('click', (event) => {
-                const $currentTarget = event.currentTarget;
-                // выведем значения в консоль
-                let inText;
-                if ($currentTarget != null) {
-                    inText = ($currentTarget as HTMLElement).textContent;
-                }
-                const nameText = inText?.trim().split('  ')[0].trim();
-                //console.log(event.target);
-
-                load.getData().then((data) => {
-                    const cardFilter = data.filter((item: Options) => {
-                        if (nameText === item.name) {
-                            return item;
-                        }
-                    });
-                    //console.log(cardFilter[0].article);
-                    const popup = new Popup();
-                    popup.createPopup(cardFilter[0]);
-                    document.body.classList.add('scroll-off');
-                    const BTN_CLOSE = document.querySelector('.modal-close');
-                    const modalWinow = document.querySelector('.modal-window');
-                    if (modalWinow != null) {
-                        document.addEventListener('click', (event) => {
-                            //console.log(event.target);
-                            if (event.target === modalWinow) {
-                                popup.destroy();
-                            }
-                        });
-                    }
-                    if (BTN_CLOSE != null) {
-                        BTN_CLOSE.addEventListener('click', popup.destroy);
-                    }
-                });
-            });
-        });
-    })
-    .then(() => {
-        document.querySelectorAll('.modal-add').forEach((elem) => {
-            elem.addEventListener('click', (event) => {
-                console.log(event.target);
-            });
-        });
+load.getData().then((data) => {
+    for (let i = 0; i < 6; i++) {
+        cards.createCard(data[i]);
+    }
+    cards.card_more();
+    cards.card_add();
+    const btn_load_all = document.createElement('button');
+    btn_load_all.className = 'load_all';
+    btn_load_all.innerText = 'LOAD ALL';
+    document.querySelector('.load')?.append(btn_load_all);
+    document.querySelector('.load_all')?.addEventListener('click', () => {
+        //cards.delete();
+        btn_load_all.classList.add('hidden');
+        for (let i = 6; i < data.length; i++) {
+            cards.createCard(data[i]);
+        }
+        cards.card_more();
+        cards.card_add();
     });
+});

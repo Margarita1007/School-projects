@@ -21,7 +21,7 @@ class Popup {
                         <h5> <b>Number of modules:</b> ${selectCard.modules} </h5>
                         <h5> <b>Width: </b> ${selectCard.width} cm </h5>
                         <h5> <b>Height: </b> ${selectCard.height} cm </h5>
-                        <button class="modal-add" data-id="1">Buy</button>
+                        <h5> <b>Stock availability: </b> ${selectCard.stock}</h5>
                     </div>
                 </div>
                 </div>
