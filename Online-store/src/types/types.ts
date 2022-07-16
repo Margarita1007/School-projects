@@ -1,7 +1,7 @@
 export type Options = {
-    article?: string;
+    article?: string | null;
     name?: string;
-    theme?: string;
+    theme?: string | null;
     modules?: number;
     width?: number;
     height?: number;
