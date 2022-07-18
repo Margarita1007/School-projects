@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Online store</title>
-    <link href="https://faviconka.ru/ico/1/faviconka.ru_1_125443.ico" rel ="icon" type="image/x icon">
+    <link href="./icons/shopping-bag.png" rel ="icon" type="image/x icon">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300|Sonsie+One" rel="stylesheet" type="text/css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,7 +13,7 @@
 </head>
 <body>
   <div class="wrapper">
-  <header class="wrapper-header">
+  <header class="wrapper-header" id="header">
     <div class="first-line">
     <div class="logo"> 
         <img src='./icons/logo.png' alt="logo">
@@ -21,8 +21,8 @@
     
     <nav class="nav">
         <div class="nav-list" id="myTopnav">
-        <a href="../main/index.html#startscreen" class="nav-link" id="about">Home</a>
-        <a href="../main/index.html#page-help" class="nav-link">About</a>
+        <a href="#header" class="nav-link" id="home">Home</a>
+        <a href="#about" class="nav-link" id="about">About</a>
         <a href="#footer" class="nav-link">Contacts</a>
         </div>
     </nav>
@@ -41,43 +41,116 @@
     <div class="main-filters">
         <fieldset class="theme-filter">
             <legend>Theme</legend>
+            <div>
+                <input type="checkbox" id="nature" name="theme">
+                <label for="nature">Nature</label><br/>
+            </div>
 
-            <input type="checkbox" id="nature" name="picture">
-            <label for="nature">Nature</label><br/>
+            <div>
+                <input type="checkbox" id="animals" name="theme">
+                <label for="animals">Animals</label><br/>
+            </div>
+            
+            <div>
+                <input type="checkbox" id="minimalism" name="theme">
+                <label for="minimalism">Minimalism</label>
+            </div>
 
-            <input type="checkbox" id="animals" name="picture">
-            <label for="animals">Animals</label><br/>
-
-            <input type="checkbox" id="minimalism" name="picture">
-            <label for="minimalism">Minimalism</label>
+            <div>
+                <input type="checkbox" id="travel" name="theme">
+                <label for="travel">Travel</label>
+            </div>
         </fieldset>
-        
-        <fieldset class="stock-filter">
-            <legend>Stock availability</legend>
 
-            <input type="radio" id="stock" name="picture">
-            <label for="stock">Only in stock</label><br/>
-
-            <input type="radio" id="all" name="picture">
-            <label for="all">All goods</label><br/>
+        <fieldset class="width-filter">
+            <legend>Width</legend>
+            <div>
+                <input type="checkbox" id="60-width" name="width">
+                <label for="60-width">60 cm</label><br/>
+            </div>   
+            <div>
+                <input type="checkbox" id="120-width" name="width">
+                <label for="120-cm">120 cm</label><br/>
+            </div>
+            <div>
+                <input type="checkbox" id="150-width" name="width">
+                <label for="150-cm">150 cm</label><br/>
+            </div>
+            <div>
+                <input type="checkbox" id="180-width" name="width">
+                <label for="180-width">180 cm</label><br/>
+            </div>
+            <div>
+                <input type="checkbox" id="210-width" name="width">
+                <label for="210-width">210 cm</label><br/>
+            </div>
+            <div>
+                <input type="checkbox" id="240-width" name="width">
+                <label for="240-width">240 cm</label><br/>
+            </div>
         </fieldset>
+
+        <fieldset class="height-filter">
+            <legend>height</legend>
+            <div>
+                <input type="checkbox" id="60-height" name="height">
+                <label for="60-height">60 cm</label><br/>
+            </div>  
+            <div>
+                <input type="checkbox" id="90-height" name="height">
+                <label for="90-cm">90 cm</label><br/>
+            </div> 
+            <div>
+                <input type="checkbox" id="100-height" name="height">
+                <label for="100-cm">100 cm</label><br/>
+            </div>
+            <div>
+                <input type="checkbox" id="120-height" name="height">
+                <label for="120-cm">120 cm</label><br/>
+            </div>
+            <div>
+                <input type="checkbox" id="140-height" name="height">
+                <label for="140-cm">140 cm</label><br/>
+            </div>
+            <div>
+                <input type="checkbox" id="150-height" name="height">
+                <label for="150-cm">150 cm</label><br/>
+            </div>
+        </fieldset>
+
         
         <fieldset class="modules-filter">
             <legend>Number of modules</legend>
 
-            <input type="checkbox" id="1-modules" name="picture">
-            <label for="1-modules">1 module</label><br/>
+            <div>
+                <input type="checkbox" id="1-modules" name="modules">
+                <label for="1-modules">1 module</label><br/>
+            </div>
 
-            <input type="checkbox" id="2-modules" name="picture">
-            <label for="2-modules">2 modules</label><br/>
+            <div>
+                <input type="checkbox" id="2-modules" name="modules">
+                <label for="2-modules">2 modules</label><br/>
+            </div>
 
-            <input type="checkbox" id="3-modules" name="picture">
-            <label for="3-modules">3 modules</label><br/>
+            <div>
+                <input type="checkbox" id="3-modules" name="modules">
+                <label for="3-modules">3 modules</label><br/>
+            </div>
 
-            <input type="checkbox" id="5-modules" name="picture">
-            <label for="5-modules">5 modules</label><br/>
+            <div>
+                <input type="checkbox" id="5-modules" name="modules">
+                <label for="5-modules">5 modules</label><br/>
+            </div>
         </fieldset>  
-
+        <div class="div_clear_all hidden" type="button">
+            <button class="clear_all">Clear LS</button>
+        </div>
+        <div class="div_clear_filters" type="button">
+            <button class="clear_filters">Clear filters</button>
+        </div>
+        <div class="div_clear_cart" type="button">
+            <button class="clear_cart">Clear cart</button>
+        </div>
 
     </div>
     <div class="main-cards">
@@ -87,7 +160,7 @@
 
     </div>
   </main> 
-  <footer>
+  <footer id='footer'>
     <div class="wrapper-footer">
         
         <div class="footer-info">

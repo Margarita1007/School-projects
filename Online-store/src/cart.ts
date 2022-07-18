@@ -19,7 +19,8 @@ class Cart {
 
     clear() {
         this.items = [];
-        localStorage.clear();
+        localStorage.removeItem('cart');
+        localStorage.removeItem('cart_value');
     }
 }
 

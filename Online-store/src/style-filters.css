@@ -1,0 +1,8 @@
+.theme-filter, .modules-filter, .width-filter, .height-filter {
+    display: flex;
+    flex-direction: column;
+    font-family: 'Ubuntu', sans-serif;
+}
+
+
+

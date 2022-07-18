@@ -50,8 +50,8 @@ class Popup {
             //const cartAdd = cardClone.querySelector('.add');
 
             if (popupPhoto != null) {
-                popupPhoto.src = `${selectCard.imgsrc}`;
-                popupPhoto.alt = `${selectCard.article}`;
+                popupPhoto.src = selectCard.imgsrc;
+                popupPhoto.alt = selectCard.article;
             }
             if (popupName != null) {
                 popupName.textContent = selectCard.name;

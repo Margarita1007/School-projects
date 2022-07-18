@@ -8,7 +8,7 @@
 }
 
 .hidden {
-    display: none;
+    display: none !important;
 }
 
 .logo img {
@@ -99,6 +99,7 @@ grid-template-areas:
     display: flex;
     flex-direction: column;
     gap: 30px;
+    width: 190px;
 }
 
 .main-cards {
@@ -108,13 +109,14 @@ grid-template-areas:
     flex-wrap: wrap;
     row-gap: 30px;
     column-gap: 3%;
-    justify-content: space-between;
+    justify-content: start;
 }
 
 .card {
     display: flex;
     flex-direction: column;
     width: 30%;
+    height: max-content;
     box-shadow: 0 0 1em rgba(0, 0, 0, .8);
     transition: 0.3s;
 } 
@@ -171,14 +173,14 @@ grid-template-areas:
 
 .add {
     grid-area: D;
+    border: none;
     border-radius: 35px;
-    border: 1px solid #7ccbc8;
     width: 35px;
     height: 35px;
     align-self: center;
     justify-self: end;
     margin-right: 10%;
-    background-color: #7ccbc8;
+    background: none;
     font-family: 'Ubuntu', sans-serif;
     font-size: 1em;
     margin: 0 10% 5% 0;
@@ -186,7 +188,7 @@ grid-template-areas:
 
 .add:hover {
     cursor: pointer;
-    background-color: aquamarine;
+    background-color: #7ccbc8;
 }
 
 .add-img {
@@ -195,7 +197,7 @@ grid-template-areas:
 }
 
 .added {
-    background-color: aquamarine;
+    background-color: #7ccbc8;
 }
 
 .load {
@@ -204,7 +206,12 @@ grid-template-areas:
     justify-content: center;
 }
 
-.load_all {
+.div_clear_filters, .div_clear_cart, .div_clear_all {
+    display: flex;
+    justify-content: center;
+}
+
+.load_all, .clear_filters, .clear_cart, .clear_all {
     width: 150px;
     height: 40px;
     border-radius: 5px;
@@ -212,10 +219,10 @@ grid-template-areas:
     font-size: 1em;
     font-weight: 400;
     background-color: #7ccbc8;
-    margin: 20px;
+    margin: 0;
 }
 
-.load_all:hover{
+.load_all:hover, .clear_filters:hover, .clear_cart:hover, .clear_all:hover {
     cursor: pointer;
     font-weight: 600;
     background-color: #4f4f4f;

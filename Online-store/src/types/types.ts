@@ -11,7 +11,7 @@ export type Options = {
 }
 
 export type Data = {
-    article?: string;
+    article: string;
     name: string;
     theme?: string;
     modules?: number;
