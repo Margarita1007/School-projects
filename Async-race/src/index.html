@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ASYNC race</title>
+</head>
+<body>
+    <header>
+        <div class="header-wrapper">
+            <div class="header__logo">
+                <img src="./assets/racing-logo.jpg" alt="logo">
+            </div>
+            <div class="header__buttons">
+                <button class="header__buttons-button button" type="button" name="garage">GO TO GARAGE</button>
+                <button class="header__buttons-button button" type="button" name="winners">GO TO WINNERS</button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="main-wrapper">
+            <div class="main__buttons">
+                <div class="main__buttons__create main-buttons">
+                    <input type="text" id="create__name" name="create">
+                    <input type="color" id="create__color" name="create">
+                    <button class="main__buttons__create-create" type="button" name="create">CREATE</button>
+                </div>
+                <div class="main__buttons__update main-buttons disabled">
+                    <input type="text" id="update__name" name="update">
+                    <input type="color" id="update__color" name="update">
+                    <button class="main__buttons__update button_update" type="button" name="update">UPDATE</button>
+                </div>
+                <div class="main__buttons__race main-buttons">
+                    <button class="main__buttons__race-race" type="button" name="race">RACE!</button>
+                    <button class="main__buttons__race-reset" type="button" name="reset">RESET</button>
+                    <button class="main__buttons__race-generate" type="button" name="generate">GENERATE CARS</button>
+                </div>
+            </div>
+            <div class="main__garage">
+                <div class="garage__head">
+                    <h2>Garage</h2>
+                    <h3>Page <span class="garage__head-page-number">1</span></h3>
+                </div>
+            </div>
+            <div class="main__pagination">
+                <button class="main__pagination-prev disabled" type="button" name="prev">PREV</button>
+                <button class="main__pagination-next disabled" type="button" name="next">NEXT</button>
+            </div>
+
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-wrapper">
+            <p class="footer__github">
+                <a class="footer__github-a" target="_blank" href="#">github</a>, 2022
+            </p>
+            <div class="footer__rsschool">
+                <a target="_blank" href="https://rs.school/js/"><img class="footer__rsschool-img" src="./assets/rsschool.png" alt="RSSchool logo"></a>
+            </div>
+        </div>
+    </footer>
+
+    <template id="garage">
+        <div class="garage__track">
+            <div class="garage__track__head">
+                <div class="garage__track__head__buttons">
+                    <button class="garage__track__head__buttons-select" type="button" name="select">SELECT</button>
+                    <button class="garage__track__head__buttons-remove" type="button" name="remove">REMOVE</button>
+                </div>
+                <span class="garage__track__head-name"></span>
+            </div>
+            <div class="garage__track__line">
+                <div class="garage__track__line__buttons">
+                    <button class="garage__track__line__buttons-start" type="button" name="start">START</button>
+                    <button class="garage__track__line__buttons-stop" type="button" name="stop">STOP</button>
+                </div>
+                <div class="garage__track__line-vehicle">
+                    <img class="garage__track__line-vehicle-img" src="./assets/car.png">
+                </div>
+                <div class="garage__track__line-finish">
+                    <img class="garage__track__line-finish-img" src="./assets/finish-flag.png">
+                </div>
+            </div>
+        </div>
+    </template>
+    <template id="one_car">
+        <div class="garage__track">
+            <div class="garage__track__head">
+                <div class="garage__track__head__buttons">
+                    <button class="garage__track__head__buttons-select" type="button" name="select">SELECT</button>
+                    <button class="garage__track__head__buttons-remove" type="button" name="remove">REMOVE</button>
+                </div>
+                <span class="garage__track__head-name"></span>
+            </div>
+            <div class="garage__track__line">
+                <div class="garage__track__line__buttons">
+                    <button class="garage__track__line__buttons-start" type="button" name="start">START</button>
+                    <button class="garage__track__line__buttons-stop" type="button" name="stop">STOP</button>
+                </div>
+                <div class="garage__track__line-vehicle">
+                    <img class="garage__track__line-vehicle-img" src="./assets/car.png">
+                </div>
+                <div class="garage__track__line-finish">
+                    <img class="garage__track__line-finish-img" src="./assets/finish-flag.png">
+                </div>
+            </div>
+        </div>
+    </template>
+</body>
+</html>
