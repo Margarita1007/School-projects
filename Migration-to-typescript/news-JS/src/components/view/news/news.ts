@@ -21,24 +21,18 @@ class News implements NewsInterface {
                 const news__readmore = newsClone.querySelector('.news__read-more a');
 
                 if (idx % 2) {
-                    if (news__item) news__item.classList.add('alt'); 
+                    if (news__item) news__item.classList.add('alt');
                 }
 
                 if (news__meta_photo) {
-                    news__meta_photo.style.backgroundImage = `url(${
-                        item.urlToImage || 'img/news_placeholder.jpg'
-                    })`;
+                    news__meta_photo.style.backgroundImage = `url(${item.urlToImage || 'img/news_placeholder.jpg'})`;
                 }
 
                 if (news__meta_author) {
                     news__meta_author.textContent = item.author || item.source.name;
                 }
                 if (news__meta_date) {
-                    news__meta_date.textContent = item.publishedAt
-                    .slice(0, 10)
-                    .split('-')
-                    .reverse()
-                    .join('-');
+                    news__meta_date.textContent = item.publishedAt.slice(0, 10).split('-').reverse().join('-');
                 }
 
                 if (news__description_title) {
@@ -48,7 +42,7 @@ class News implements NewsInterface {
                 if (news__description_sourse) {
                     news__description_sourse.textContent = item.source.name;
                 }
-                
+
                 if (news__description_content) {
                     news__description_content.textContent = item.description;
                 }
@@ -58,7 +52,6 @@ class News implements NewsInterface {
 
                 fragment.append(newsClone);
             }
-
         });
 
         if (news_elem) {

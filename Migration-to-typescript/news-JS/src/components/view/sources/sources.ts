@@ -27,7 +27,7 @@ class Sources implements SourcesInterface {
     }
 
     clear(): void {
-        
+        console.log();
     }
 }
 
