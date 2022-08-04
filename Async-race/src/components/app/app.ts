@@ -1,6 +1,6 @@
 import Loader from '../loader/loader';
 import QueryMaker from '../loader/query-maker';
-import { AppInterface, CreateCarContentResponse } from '../types/types';
+import { AppInterface } from '../types/types';
 import Viewer from '../viewer/viewer';
 import { state } from './state';
 
@@ -27,8 +27,29 @@ class App implements AppInterface {
         this.view.viewGarage(getGarageCars.cars);
         state.cars = getGarageCars.cars;
         state.countCar = getGarageCars.count;
-        console.log(state.cars);
-        console.log(state.countCar);
+        const garage_countHTML = document.querySelector('.garage_count');
+        const garage_pages = document.querySelector('.garage_pages');
+        const pages = Math.ceil(state.countCar / state.limit);
+        const paginator = document.querySelector('.garage__head-page-number');
+        if (garage_countHTML) {
+            garage_countHTML.innerHTML = `${state.countCar} cars`;
+        }
+        if (garage_pages && paginator) {
+            garage_pages.innerHTML = `${pages}`;
+            paginator.innerHTML = `${state.pageGarage}`;
+        }
+        // if (garage_pages && paginator) {
+        //     if (pages === 0 || state.pageGarage === 0) {
+        //         garage_pages.innerHTML = '1';
+        //         paginator.innerHTML = '1';
+        //     } else {
+        //         garage_pages.innerHTML = `${pages}`;
+        //         paginator.innerHTML = `${state.pageGarage}`;
+        //     }
+        // }
+        //console.log(state.pageGarage);
+        //console.log(state.cars);
+        //console.log(state.pageGarage);
     }
 
     clear() {
@@ -40,7 +61,7 @@ class App implements AppInterface {
 
     async createCar(dataCar: { name: string; color: string }) {
         const dataCarJSON = JSON.stringify(dataCar);
-        const createCarData: CreateCarContentResponse = await this.loader.createRespOneCar(
+        await this.loader.createRespOneCar(
             this.query.queryMakerPOSTQuery({
                 url: 'garage',
                 method: 'POST',
@@ -49,12 +70,11 @@ class App implements AppInterface {
             })
         );
         await this.start();
-        return createCarData;
-        //state.cars.push(createCarData);
-        //state.countCar++;
-        //console.log(state.cars);
-        //console.log(state.countCar);
-        //return this.view.viewOneCar(createCarData);
+    }
+
+    async generateCars(dataCar: { name: string; color: string }[]) {
+        await Promise.all(dataCar.map(async (car) => await this.createCar(car)));
+        await this.start();
     }
 
     async deleteCar(id: string) {
@@ -88,42 +108,20 @@ class App implements AppInterface {
         );
     }
 
-    // buttonsEventRemove(button: HTMLElement) {
-    //     //const button_remove = document.querySelector('.garage__track__head__buttons-remove') as HTMLElement;
-    //     //const updateName = (<HTMLInputElement>document.getElementById('update__name')) as HTMLInputElement;
-    //     //const updateColor = (<HTMLInputElement>document.getElementById('update__color')) as HTMLInputElement;
-    //     button.addEventListener('click', (e) => {
-    //         const target = e.target as HTMLElement;
-    //         console.log(target);
-    //         const parent = target.parentNode?.parentNode?.parentNode as HTMLElement;
-    //         const elemID = parent.getAttribute('id');
-    //         if (elemID) {
-    //             this.deleteCar(elemID);
-    //             console.log(elemID);
-    //             parent.remove();
-    //         }
-    //         //console.log(elemID);
-    //     });
-    // }
+    async startStopEngine(id: number, status: string) {
+        const getStartData = await this.loader.getStartStop(
+            this.query.queryMakerEngine({ url: 'engine', method: 'PATCH', id: id, status: status })
+        );
+        return getStartData;
+    }
+
+    async drive(id: number, status: string) {
+        //const controller = new AbortController()
+        const resp = await this.loader.getDrive(
+            this.query.queryMakerEngine({ url: 'engine', method: 'PATCH', id: id, status: status })
+        );
+        return resp;
+    }
 }
 
 export default App;
-
-/*
-const startApp = async () => {
-    await app.start();
-    const buttons_remove = document.querySelectorAll('.garage__track__head__buttons-remove') as NodeListOf<HTMLElement>;
-    buttons_remove.forEach((button) => {
-        app.buttonsEventRemove(button);
-    });
-    //app.buttonsEvent();
-    const button_create = document.querySelector('.main__buttons__create-create') as HTMLElement;
-    controller.addListener(button_create, 'click', async () => {
-        const dataCar = controller.readOptionsForCreateQuery();
-        const result = await app.createCar(dataCar.data);
-        console.log(result);
-        //app.buttonsEventRemove();
-    });
-};
-startApp();
-*/

@@ -1,4 +1,10 @@
-import { GetCarsContentResponse, UpdateCarContentResponse, LoaderInterface } from '../types/types';
+import {
+    GetCarsContentResponse,
+    UpdateCarContentResponse,
+    LoaderInterface,
+    StartStopEngineResponse,
+    DriveResponse,
+} from '../types/types';
 // send a fetch request for specified query
 class Loader implements LoaderInterface {
     async getResp(query: { url: string; method: string }, page: number, limit: number) {
@@ -50,6 +56,27 @@ class Loader implements LoaderInterface {
     }) {
         const resp = fetch(query.url, { method: query.method, headers: query.header, body: query.body });
         return (await (await resp).json()) as UpdateCarContentResponse;
+    }
+
+    async getStartStop(query: { url: string; method: string }) {
+        const resp = await fetch(query.url, { method: query.method });
+        if (resp.ok) {
+            return (await resp.json()) as StartStopEngineResponse;
+        } else {
+            alert('Ошибка HTTP: ' + resp.status);
+        }
+    }
+
+    async getDrive(query: { url: string; method: string }) {
+        //const controller = new AbortController();
+        //const signal = controller.signal;
+        const resp = await fetch(query.url, { method: query.method });
+        if (resp.ok) {
+            return (await resp.json()) as DriveResponse;
+        } else {
+            //controller.abort();
+            console.log('Ошибка HTTP: ' + resp.status);
+        }
     }
 }
 

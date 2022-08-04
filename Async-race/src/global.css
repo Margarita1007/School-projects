@@ -1,5 +1,6 @@
 body {
     background-color: white;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .disabled {
@@ -9,7 +10,8 @@ body {
 
 .header-wrapper {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+    gap: 50px;
     align-items: center;
     margin: 5%;
 }
@@ -21,13 +23,13 @@ body {
     flex-direction: row;
     align-items: center;
     column-gap: 5%;
-    margin-left: auto;
+    margin-right: auto;
 }
 .header__buttons-button {
     border-color: beige;
     border-radius: 5px;
-    width: 200px;
-    height: 50px;
+    width: 160px;
+    height: 40px;
     cursor: pointer;
     background-color: rgb(244, 248, 170);
 }
@@ -66,6 +68,9 @@ body {
 }
 .garage__track {
     border-bottom: 5px dashed rgb(107, 1, 1);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 .garage__track__head {
     display: flex;
@@ -84,7 +89,18 @@ body {
 .garage__track__line-vehicle {
     width: 100px;
     display: flex;
+    flex-direction: column;
 }
+.drive_text {
+    display: flex;
+    flex-direction: row;
+}
+
+.broken, .finished {
+    margin: 0;
+    opacity: 0;
+}
+
 .garage__track__line-vehicle-img {
     width: 100%;
     align-self: flex-end;
@@ -98,12 +114,13 @@ body {
 .garage__track__line__buttons {
     display: flex;
     flex-direction: row;
+    justify-content: space-around;
+    width: 140px;
 }
-.garage__track__line__buttons-start, .garage__track__line__buttons-stop {
+/* .garage__track__line__buttons-start, .garage__track__line__buttons-stop {
     width: 70px;
-    height: 70px;
-    border-radius: 70px;
-}
+    height: 30px;
+} */
 
 .footer-wrapper {
     display: flex;
@@ -122,6 +139,14 @@ body {
 }
 .footer__rsschool-img {
     width: 100px;
+}
+
+#biew_winners {
+    display: none;
+}
+
+.winners_table {
+    border: 2px;
 }
 
 

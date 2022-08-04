@@ -49,7 +49,22 @@ class Controller implements ControllerInterface {
     }
 
     generateCars(count: number) {
-        const brands = ['Lada', 'Nissan', 'Ford', 'Subaru', 'Suzuki', 'Renault', 'Hyunday', 'Honda', 'Volvo', 'UAZ'];
+        const brands = [
+            'Lada',
+            'Nissan',
+            'Ford',
+            'Subaru',
+            'Kia',
+            'Mazda',
+            'Toyota',
+            'Suzuki',
+            'Renault',
+            'Hyunday',
+            'Honda',
+            'Volvo',
+            'UAZ',
+            'Skoda',
+        ];
         const models = [
             'Kalina',
             'Jimny',
@@ -61,6 +76,17 @@ class Controller implements ControllerInterface {
             'Patriot',
             'XC70',
             'Impreza',
+            'Camry',
+            'Land Rover',
+            'Discovery',
+            'Sandero',
+            'Priora',
+            'Rio',
+            'Cerato',
+            'Getz',
+            'Picanto',
+            'Optima',
+            'Rapid',
         ];
         function generateName() {
             return `${brands[Math.floor(Math.random() * brands.length)]} ${

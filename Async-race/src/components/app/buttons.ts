@@ -1,8 +1,10 @@
 import App from './app';
 import Controller from './controller';
 import { state } from './state';
+import Drive from './drive';
 const app = new App();
 const controller = new Controller();
+const drive = new Drive();
 
 class Buttons {
     addListenerButtons() {
@@ -15,13 +17,24 @@ class Buttons {
                 const id = +eventTarget.id.split('btn_remove_')[1];
                 await app.deleteCar(id.toString());
                 await app.start();
+                if (state.cars.length === 0 && state.pageGarage > 1) {
+                    state.pageGarage--;
+                    //console.log('as');
+                    await app.start();
+                }
                 //parentBTNREmove.remove();
-                console.log('remove btn', id);
+                //console.log('remove btn', id);
+                //this.pagination();
             }
 
             if (eventTarget.classList.contains('main__buttons__create-create')) {
                 const dataCar = controller.readOptionsForCreateQuery();
                 await app.createCar(dataCar.data); //view
+                const nextButton = document.querySelector('.main__pagination-next') as HTMLButtonElement;
+                if (state.pageGarage * state.limit < state.countCar) {
+                    nextButton.classList.remove('disabled');
+                }
+                //this.pagination();
             }
 
             if (
@@ -29,10 +42,6 @@ class Buttons {
                 updateBlock.classList.contains('disabled')
             ) {
                 const id = +eventTarget.id.split('btn_select_')[1];
-                //GET - получить данные по id - имя и цвет
-                //присвоить значения инпутам
-                //по клику - считать измененные значения инпутов
-                //запрос на сервер на изменение данных
                 const data = await app.getCar(id.toString());
                 const updateName = (<HTMLInputElement>document.getElementById('update__name')) as HTMLInputElement;
                 const updateColor = (<HTMLInputElement>document.getElementById('update__color')) as HTMLInputElement;
@@ -49,19 +58,12 @@ class Buttons {
                     async () => {
                         controller.lockUnlockElement(updateBlock);
                         const dataNew = controller.readOptionsForUpdateQuery(id);
-                        console.log(dataNew.data);
+                        //console.log(dataNew.data);
                         await app.updateCar(dataNew.data);
                         //app.clear();
+                        updateName.value = '';
+                        updateColor.value = '#000000';
                         await app.start();
-                        // const promiseClear = new Promise((resolve) => {
-                        //     resolve(app.clear());
-                        // });
-                        // promiseClear.then(() => {
-                        //     app.start();
-                        //     //addListenerButtons();
-                        // });
-                        //await app.start();
-                        //addListenerButtons();
                     },
                     { once: true }
                 );
@@ -69,8 +71,14 @@ class Buttons {
 
             if (eventTarget.classList.contains('main__buttons__race-generate')) {
                 const count = state.generateCount;
-                const generateCars = controller.generateCars(count);
-                await Promise.all(generateCars.map(async (car) => app.createCar(car)));
+                const generateCarsArray = controller.generateCars(count);
+                await app.generateCars(generateCarsArray);
+                const nextButton = document.querySelector('.main__pagination-next') as HTMLButtonElement;
+                if (state.pageGarage * state.limit < state.countCar) {
+                    nextButton.classList.remove('disabled');
+                }
+                //await Promise.all(generateCars.map(async (car) => await app.createCar(car)));
+                //this.pagination();
             }
         });
     }
@@ -80,50 +88,89 @@ class Buttons {
         const nextButton = document.querySelector('.main__pagination-next') as HTMLButtonElement;
         const prevButton = document.querySelector('.main__pagination-prev') as HTMLButtonElement;
 
-        if (state.countCar > state.limit) {
-            controller.lockUnlockElement(nextButton);
+        if (state.pageGarage * state.limit < state.countCar) {
+            nextButton.classList.remove('disabled');
         }
 
-        nextButton.addEventListener('click', () => {
-            state.pageGarage++;
+        document.body.addEventListener('click', (event) => {
+            const eventTarget = event.target as HTMLButtonElement;
+            if (eventTarget === nextButton) {
+                state.pageGarage++;
+                app.start();
+            }
+            if (eventTarget === prevButton) {
+                state.pageGarage--;
+                app.start();
+            }
+
             if (paginator) {
                 paginator.innerHTML = state.pageGarage.toString();
+                //app.start();
+                //console.log(state.pageGarage);
+            }
+
+            if (state.pageGarage === 1) {
+                prevButton.classList.add('disabled');
+                nextButton.classList.remove('disabled');
+            } else {
+                prevButton.classList.remove('disabled');
+            }
+
+            if (state.pageGarage * state.limit < state.countCar) {
+                nextButton.classList.remove('disabled');
+            } else {
+                nextButton.classList.add('disabled');
             }
         });
-        //const div_num = document.querySelectorAll('.num');
+    }
+
+    addListenerDriving() {
+        document.body.addEventListener('click', async (event) => {
+            const eventTarget = event.target as HTMLButtonElement;
+            //const width = document.querySelector('.garage__track__line')?.clientWidth;
+            if (eventTarget.classList.contains('garage__track__line__buttons-start')) {
+                const id = +eventTarget.id.split('btn_start_')[1];
+                drive.startEngine(id);
+            }
+
+            if (eventTarget.classList.contains('garage__track__line__buttons-stop')) {
+                const id = +eventTarget.id.split('btn_stop_')[1];
+                drive.stopEngine(id);
+            }
+
+            if (eventTarget.classList.contains('main__buttons__race-race')) {
+                drive.raceAll();
+            }
+
+            if (eventTarget.classList.contains('main__buttons__race-reset')) {
+                drive.resetRace();
+            }
+        });
+    }
+
+    viewGarageWinners() {
+        document.body.addEventListener('click', (event) => {
+            const eventTarget = event.target as HTMLButtonElement;
+            const btnToGarage = document.querySelector('.button_toGarage') as HTMLButtonElement;
+            const btnToWinners = document.querySelector('.button_toWinners') as HTMLButtonElement;
+            const viewGarage = document.getElementById('view_garage') as HTMLElement;
+            const viewWinners = document.getElementById('view_winners') as HTMLElement;
+            //const width = document.querySelector('.garage__track__line')?.clientWidth;
+            if (eventTarget === btnToGarage) {
+                viewWinners.style.display = 'none';
+                viewGarage.style.display = 'block';
+                controller.lockUnlockElement(btnToGarage);
+                controller.lockUnlockElement(btnToWinners);
+                state.view = 'garage';
+            }
+            if (eventTarget === btnToWinners) {
+                viewGarage.style.display = 'none';
+                viewWinners.style.display = 'block';
+                controller.lockUnlockElement(btnToWinners);
+                controller.lockUnlockElement(btnToGarage);
+                state.view = 'winners';
+            }
+        });
     }
 }
-
-// export function buttonsSelect() {
-//     const buttons_select = document.querySelectorAll(
-//         '.garage__track__head__buttons-select'
-//     ) as NodeListOf<HTMLElement>;
-
-//     buttons_select.forEach((button) => {
-//         button.addEventListener('click', () => {
-//             //console.log(button);
-//         });
-//     });
-// }
-
-// export function buttonsRemove() {
-//     const buttons_remove = document.querySelectorAll(
-//         '.garage__track__head__buttons-remove'
-//     ) as NodeListOf<HTMLElement>;
-//     //const updateName = (<HTMLInputElement>document.getElementById('update__name')) as HTMLInputElement;
-//     //const updateColor = (<HTMLInputElement>document.getElementById('update__color')) as HTMLInputElement;
-
-//     buttons_remove.forEach((button) => {
-//         button.addEventListener('click', (e) => {
-//             const target = e.target as HTMLElement;
-//             const parent = target.parentNode?.parentNode?.parentNode as HTMLElement;
-//             const elemID = parent.getAttribute('id');
-//             if (elemID) {
-//                 app.deleteCar(elemID);
-//                 parent.remove();
-//             }
-//             //console.log(elemID);
-//         });
-//     });
-// }
 export default Buttons;

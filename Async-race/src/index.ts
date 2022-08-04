@@ -3,15 +3,19 @@ import App from './components/app/app';
 //import Viewer from './components/viewer/viewer';
 import './global.css';
 import Buttons from './components/app/buttons';
+//import Drive from './components/app/drive';
 
 const app = new App();
 const buttons = new Buttons();
+//const drive = new Drive();
 //const controller = new Controller();
 
 const startApp = async () => {
     await app.start();
     buttons.addListenerButtons();
     buttons.pagination();
+    buttons.addListenerDriving();
+    buttons.viewGarageWinners();
 };
 
 startApp();

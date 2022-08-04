@@ -30,12 +30,19 @@ class Viewer implements ViewerInterface {
             const trackSelect = carClone.querySelector('.garage__track');
             const button_remove = carClone.querySelector('.garage__track__head__buttons-remove');
             const button_select = carClone.querySelector('.garage__track__head__buttons-select');
+            const button_startEngine = carClone.querySelector('.garage__track__line__buttons-start');
+            const button_stopEngine = carClone.querySelector('.garage__track__line__buttons-stop');
             const trackNameSelect = carClone.querySelector('.garage__track__head-name');
+            const brokenText = carClone.querySelector('.broken');
+            const finishText = carClone.querySelector('.finished');
+            const trackVehicleBlock = carClone.querySelector('.garage__track__line-vehicle') as HTMLElement;
             const trackVehicleSelect = carClone.querySelector('.garage__track__line-vehicle-img') as HTMLDivElement;
 
-            if (trackNameSelect && trackVehicleSelect) {
+            if (trackNameSelect && trackVehicleSelect && trackVehicleBlock) {
                 trackNameSelect.textContent = car.name;
                 trackVehicleSelect.style.backgroundColor = car.color;
+                trackVehicleSelect.setAttribute('id', `img_${car.id}`);
+                trackVehicleBlock.setAttribute('id', `img_block_${car.id}`);
             }
 
             if (trackSelect) {
@@ -47,40 +54,23 @@ class Viewer implements ViewerInterface {
                 button_select.setAttribute('id', `btn_select_${car.id}`);
             }
 
+            if (button_startEngine && button_stopEngine) {
+                button_startEngine.setAttribute('id', `btn_start_${car.id}`);
+                button_stopEngine.setAttribute('id', `btn_stop_${car.id}`);
+            }
+
+            if (brokenText && finishText) {
+                brokenText.setAttribute('id', `broke_${car.id}`);
+                finishText.setAttribute('id', `finish_${car.id}`);
+            }
+
             fragment.append(carClone);
         }
         const mainGarageSelect = document.querySelector('.main__garage');
         if (mainGarageSelect) {
             mainGarageSelect.append(fragment);
         }
-        // } else {
-        //     const main_buttons = document.querySelector('.main_buttons') as HTMLElement;
-        //     const divGarage = document.createElement('div');
-        //     divGarage.classList.add('main__garage');
-        //     if (main_buttons) {
-        //         divGarage.after(main_buttons);
-        //         divGarage.append(fragment);
-        //     }
-        // }
     }
 }
 
 export default Viewer;
-/*
-const startApp = async () => {
-    await app.start();
-    const buttons_remove = document.querySelectorAll('.garage__track__head__buttons-remove') as NodeListOf<HTMLElement>;
-    buttons_remove.forEach((button) => {
-        app.buttonsEventRemove(button);
-    });
-    //app.buttonsEvent();
-    const button_create = document.querySelector('.main__buttons__create-create') as HTMLElement;
-    controller.addListener(button_create, 'click', async () => {
-        const dataCar = controller.readOptionsForCreateQuery();
-        const result = await app.createCar(dataCar.data);
-        console.log(result);
-        //app.buttonsEventRemove();
-    });
-};
-startApp();
-*/

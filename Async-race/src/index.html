@@ -13,14 +13,14 @@
                 <img src="./assets/racing-logo.jpg" alt="logo">
             </div>
             <div class="header__buttons">
-                <button class="header__buttons-button button" type="button" name="garage">GO TO GARAGE</button>
-                <button class="header__buttons-button button" type="button" name="winners">GO TO WINNERS</button>
+                <button class="header__buttons-button button_toGarage button disabled" type="button" name="garage">TO GARAGE</button>
+                <button class="header__buttons-button button_toWinners button" type="button" name="winners">TO WINNERS</button>
             </div>
         </div>
     </header>
 
     <main>
-        <div class="main-wrapper">
+        <div class="main-wrapper" id="view_garage">
             <div class="main__buttons">
                 <div class="main__buttons__create main-buttons">
                     <input type="text" id="create__name" name="create">
@@ -33,15 +33,15 @@
                     <button class="main__buttons__update button_update" type="button" name="update">UPDATE</button>
                 </div>
                 <div class="main__buttons__race main-buttons">
-                    <button class="main__buttons__race-race" type="button" name="race">RACE!</button>
+                    <button class="main__buttons__race-race" type="button" name="race">RACE</button>
                     <button class="main__buttons__race-reset" type="button" name="reset">RESET</button>
                     <button class="main__buttons__race-generate" type="button" name="generate">GENERATE CARS</button>
                 </div>
             </div>
             <div class="main__garage">
                 <div class="garage__head">
-                    <h2>Garage</h2>
-                    <h3>Page <span class="garage__head-page-number">1</span></h3>
+                    <h2>Garage: <span class="garage_count"></span> </h2>
+                    <h3>Page <span class="garage__head-page-number">1</span> <span>/</span> <span class="garage_pages"> </span></h3>
                 </div>
             </div>
             <div class="main__pagination">
@@ -49,6 +49,10 @@
                 <button class="main__pagination-next disabled" type="button" name="next">NEXT</button>
             </div>
 
+        </div>
+        <div id="view_winners">
+            <h2>Winners: <span class="winners_count"></span></h2>
+            <h3>Page <span class="winners_page">1</span></h3>
         </div>
     </main>
 
@@ -63,29 +67,6 @@
         </div>
     </footer>
 
-    <template id="garage">
-        <div class="garage__track">
-            <div class="garage__track__head">
-                <div class="garage__track__head__buttons">
-                    <button class="garage__track__head__buttons-select" type="button" name="select">SELECT</button>
-                    <button class="garage__track__head__buttons-remove" type="button" name="remove">REMOVE</button>
-                </div>
-                <span class="garage__track__head-name"></span>
-            </div>
-            <div class="garage__track__line">
-                <div class="garage__track__line__buttons">
-                    <button class="garage__track__line__buttons-start" type="button" name="start">START</button>
-                    <button class="garage__track__line__buttons-stop" type="button" name="stop">STOP</button>
-                </div>
-                <div class="garage__track__line-vehicle">
-                    <img class="garage__track__line-vehicle-img" src="./assets/car.png">
-                </div>
-                <div class="garage__track__line-finish">
-                    <img class="garage__track__line-finish-img" src="./assets/finish-flag.png">
-                </div>
-            </div>
-        </div>
-    </template>
     <template id="one_car">
         <div class="garage__track">
             <div class="garage__track__head">
@@ -98,9 +79,13 @@
             <div class="garage__track__line">
                 <div class="garage__track__line__buttons">
                     <button class="garage__track__line__buttons-start" type="button" name="start">START</button>
-                    <button class="garage__track__line__buttons-stop" type="button" name="stop">STOP</button>
+                    <button class="garage__track__line__buttons-stop disabled" type="button" name="stop">STOP</button>
                 </div>
                 <div class="garage__track__line-vehicle">
+                    <div class="drive_text"> 
+                        <h5 class="broken"> Broken </h5>
+                        <h5 class="finished"> Finished </h5>
+                    </div>
                     <img class="garage__track__line-vehicle-img" src="./assets/car.png">
                 </div>
                 <div class="garage__track__line-finish">

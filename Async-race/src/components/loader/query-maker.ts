@@ -5,6 +5,7 @@ import {
     DeleteCarQuery,
     GetOneCarQuery,
     UpdateCarQuery,
+    StartStopEngineQuery,
 } from '../types/types';
 
 class QueryMaker implements QueryMakerInterface {
@@ -108,6 +109,13 @@ class QueryMaker implements QueryMakerInterface {
             method: options.method,
             header: options.header,
             body: options.body,
+        };
+    }
+
+    queryMakerEngine(options: StartStopEngineQuery) {
+        return {
+            url: `${this.baseLink}${options.url}?id=${options.id}&status=${options.status}`,
+            method: options.method,
         };
     }
 

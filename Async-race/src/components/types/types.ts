@@ -91,15 +91,15 @@ export type UpdateCarContentResponse = {
 } | {};
 
 export type StartStopEngineQuery = {
-    url: 'engine';
-    method: 'PATCH';
+    url: string;
+    method: string;
     id: number;
-    status: 'started' | 'stopped';
+    status: string;
 };
 export type StartStopEngineResponse = {
     velocity: number;
     distance: number;
-} | string;
+};
 
 export type SwitchDriveQuery = {
     url: 'engine';
@@ -107,9 +107,9 @@ export type SwitchDriveQuery = {
     id: number;
     status: 'drive';
 };
-export type SwitchDriveResponse = {
-    success: true;
-} | string;
+export type DriveResponse = {
+    success: string;
+};
 
 export type GetWinnersQuery = {
     url: 'winners';
@@ -218,7 +218,8 @@ export interface StateInterface {
         id: number;
     }[];
     countCar: number;
+    countWinners: number;
     generateCount: number;
-    view?: string;
+    view: string;
     sort?: string;
 }
