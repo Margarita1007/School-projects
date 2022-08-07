@@ -3,6 +3,7 @@ import {
     GetCarsContentResponse,
     //GetOneCarContentResponse,
     ViewerInterface,
+    WinnerDataType,
 } from '../types/types';
 //import { state } from '../app/state';
 
@@ -70,6 +71,68 @@ class Viewer implements ViewerInterface {
         if (mainGarageSelect) {
             mainGarageSelect.append(fragment);
         }
+    }
+
+    tableWinnersTemplate() {
+        const fragment = document.createDocumentFragment();
+        const tableTemp = document.querySelector<HTMLTemplateElement>('#winners_table');
+        if (tableTemp) {
+            const tableClone = <Element>tableTemp.content.cloneNode(true);
+            // const tableNumber = document.querySelector('.table_number') as HTMLTableElement;
+            // const tableCar = document.querySelector('.table_car') as HTMLTableElement;
+            // const tableName = document.querySelector('.table_name') as HTMLTableElement;
+            // const tableWins = document.querySelector('.table_wins') as HTMLTableElement;
+            // const tableTime = document.querySelector('.table_time') as HTMLTableElement;
+            fragment.append(tableClone);
+        }
+        const divSelect = document.getElementById('view_winners');
+        if (divSelect) {
+            divSelect.append(fragment);
+        }
+    }
+
+    tableWinners(data: WinnerDataType[]) {
+        //const rows = data.length;
+        //const cells = 5;
+        const table = document.getElementById('table_body') as HTMLTableElement;
+        table.remove();
+
+        fillTable();
+        function fillTable() {
+            const table = document.createElement('tbody');
+            table.setAttribute('id', 'table_body');
+            const tableSelect = document.getElementById('table') as HTMLTableElement;
+            tableSelect.append(table);
+            for (let i = 0; i < data.length; i++) {
+                const newrow = table.insertRow(-1);
+                newrow.insertCell(0).innerHTML = `${i + 1}`;
+                const imgCell = newrow.insertCell(1);
+                //.innerHTML = `<img class="winner-vehicle-img" src="./assets/car.png">`;
+                const img = document.createElement('img');
+                img.src = './assets/car.png';
+                img.alt = 'vehicle';
+                img.setAttribute('class', 'winner-vehicle-img');
+                img.style.backgroundColor = data[i].color;
+                imgCell.appendChild(img);
+                newrow.insertCell(2).innerHTML = `${data[i].name}`;
+                newrow.insertCell(3).innerHTML = `${data[i].wins}`;
+                newrow.insertCell(4).innerHTML = `${data[i].time}`;
+            }
+        }
+
+        // function tableFill() {
+        //     const col1 = document.querySelector('.col_first') as HTMLTableColElement;
+        //     for (let i = 0; i < data.length; i++) {
+        //         col1[i].textContent
+        //     }
+        //     // let fillFrom = 27;
+        //     // const td = document.querySelectorAll('#table td') as NodeListOf<HTMLTableSectionElement>;
+
+        //     // for (let i = 0; i < td.length; i++) {
+        //     //     td[i].textContent = `${fillFrom--}`;
+        //     //     if (fillFrom < 1) break;
+        //     // }
+        // }
     }
 }
 

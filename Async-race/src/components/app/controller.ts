@@ -1,4 +1,6 @@
-import { ControllerInterface } from '../types/types';
+import { ControllerInterface, RaceWinnerType, WinnerDataType } from '../types/types';
+import App from './app';
+const app = new App();
 
 class Controller implements ControllerInterface {
     addListener(elements: NodeList | HTMLElement, event: string, callback: () => void) {
@@ -100,6 +102,69 @@ class Controller implements ControllerInterface {
         // const generateButton = document.querySelector('.main__buttons__race-generate') as HTMLButtonElement;
         return new Array(count).fill(0).map(() => ({ name: generateName(), color: generateColor() }));
     }
+
+    async getdataWins() {
+        const dataWins = await app.getWinners();
+        const dataCar = await app.getGarage();
+        const winData: WinnerDataType[] = [];
+        dataWins.forEach((win) => {
+            dataCar.forEach((car) => {
+                if (car.id === win.id) {
+                    const elem = Object.assign({}, car, win);
+                    winData.push(elem);
+                }
+            });
+        });
+        console.log('dataWin', dataWins);
+        console.log('dataCar', dataCar);
+        return winData;
+    }
+
+    async NumberWins(winner: RaceWinnerType) {
+        if (winner.id && winner.time) {
+            //const getWin = await app.getWinner(winner.id);
+            const getWins = await app.getWinners();
+            const foundWin = getWins.find((win) => win.id === winner.id);
+            if (foundWin === undefined) {
+                const dataWin = {
+                    id: winner.id,
+                    wins: 1,
+                    time: winner.time,
+                };
+                await app.createWinner(dataWin);
+            } else {
+                if (winner.time < foundWin.time) {
+                    const dataWin = {
+                        id: winner.id,
+                        wins: (foundWin.wins += 1),
+                        time: winner.time,
+                    };
+                    await app.updateWinner(dataWin);
+                } else {
+                    const dataWin = {
+                        id: winner.id,
+                        wins: (foundWin.wins += 1),
+                        time: foundWin.time,
+                    };
+                    await app.updateWinner(dataWin);
+                }
+            }
+        }
+    }
 }
 
 export default Controller;
+
+/*
+ GetWinnersResponse = {
+    id: number;
+    wins: number;
+    time: number;
+}[];
+
+GetCarsContentResponse = {
+        name: string;
+        color: string;
+        id: number;
+}[];
+*/

@@ -43,13 +43,18 @@
                     <h2>Garage: <span class="garage_count"></span> </h2>
                     <h3>Page <span class="garage__head-page-number">1</span> <span>/</span> <span class="garage_pages"> </span></h3>
                 </div>
+                <div class="main__garage_pagination_row">
+                    <div class="main__pagination">
+                        <button class="main__pagination-prev disabled" type="button" name="prev">PREV</button>
+                        <button class="main__pagination-next disabled" type="button" name="next">NEXT</button>
+                    </div>
+                    <div class="winner_text">
+                        <h2><span class='winner_text_scoreboard'></span></h2>
+                    </div>
+                </div>
             </div>
-            <div class="main__pagination">
-                <button class="main__pagination-prev disabled" type="button" name="prev">PREV</button>
-                <button class="main__pagination-next disabled" type="button" name="next">NEXT</button>
-            </div>
-
         </div>
+
         <div id="view_winners">
             <h2>Winners: <span class="winners_count"></span></h2>
             <h3>Page <span class="winners_page">1</span></h3>
@@ -93,6 +98,38 @@
                 </div>
             </div>
         </div>
+    </template>
+
+    <template id="winners_table">
+        <button>PREV</button>
+        <button>NEXT</button>
+        <table class="table" id="table">
+            <caption>Winners</caption>
+            <colgroup>
+                <col class="col_first">
+                <col>
+                <col>
+                <col>
+                <col>
+            </colgroup>
+
+            <thead>
+              <th class="table_number">Number</th>
+              <th>Car</th>
+              <th>Name</th>
+              <th class="table-btn table-wins-btn" id="sort-by-wins">Wins</th>
+              <th class="table-btn table-time-btn" id="sort-by-time">Best time (seconds)</th>
+            </thead>
+            <tbody id="table_body"> 
+              <tr>
+                <td class="table_number"></td>
+                <td class="table_car"></td>
+                <td class="table_name"></td>
+                <td class="table_wins"></td>
+                <td class="table_time"></td>
+              </tr>
+            </tbody>
+          </table>
     </template>
 </body>
 </html>

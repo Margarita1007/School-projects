@@ -1,6 +1,6 @@
 import Loader from '../loader/loader';
 import QueryMaker from '../loader/query-maker';
-import { AppInterface } from '../types/types';
+import { AppInterface, UpdateCarContentResponse, UpdateWinnerResponse, WinnerType } from '../types/types';
 import Viewer from '../viewer/viewer';
 import { state } from './state';
 
@@ -19,7 +19,7 @@ class App implements AppInterface {
         garage.forEach((car) => {
             car.remove();
         });
-        const getGarageCars = await this.loader.getResp(
+        const getGarageCars = await this.loader.getRespPage(
             this.query.queryMakerMethod({ url: 'garage', method: 'GET' }),
             state.pageGarage,
             state.limit
@@ -50,6 +50,11 @@ class App implements AppInterface {
         //console.log(state.pageGarage);
         //console.log(state.cars);
         //console.log(state.pageGarage);
+    }
+
+    async getGarage() {
+        const getGarageCars = await this.loader.getResp(this.query.queryMakerMethod({ url: 'garage', method: 'GET' }));
+        return getGarageCars;
     }
 
     clear() {
@@ -88,7 +93,7 @@ class App implements AppInterface {
 
     async getCar(id: string) {
         const idCar = Number(id);
-        const res = await this.loader.deleteRespCar(
+        const res = await this.loader.getRespOneCar(
             this.query.queryMakerGETOneQuery({ url: 'garage', method: 'GET', id: idCar })
         );
         //console.log('get ', res);
@@ -97,7 +102,7 @@ class App implements AppInterface {
 
     async updateCar(dataCar: { name: string; color: string; id: number }) {
         const dataCarJSON = JSON.stringify(dataCar);
-        return await this.loader.updateCar(
+        return (await this.loader.updateCar(
             this.query.queryMakerUpdateQuery({
                 url: 'garage',
                 id: Number(dataCar.id),
@@ -105,7 +110,7 @@ class App implements AppInterface {
                 header: { 'Content-Type': 'application/json' },
                 body: dataCarJSON,
             })
-        );
+        )) as UpdateCarContentResponse;
     }
 
     async startStopEngine(id: number, status: string) {
@@ -122,6 +127,86 @@ class App implements AppInterface {
         );
         return resp;
     }
+
+    async createWinner(dataWin: { id: number; wins: number; time: number }) {
+        const dataWinJSON = JSON.stringify(dataWin);
+        await this.loader.createRespOneCar(
+            this.query.queryMakerPOSTQuery({
+                url: 'winners',
+                method: 'POST',
+                header: { 'Content-Type': 'application/json' },
+                body: dataWinJSON,
+            })
+        );
+    }
+
+    async getWinnersPage() {
+        const query = {
+            url: 'winners',
+            method: 'GET',
+            page: state.pageWinners,
+            limit: state.limitWin,
+            sort: 'time',
+            order: 'ASC',
+        };
+        const resp = await this.loader.getRespWinsPage(this.query.queryMakerWinnersPageQuery(query));
+        state.carsWin = resp.carsWin;
+        state.countWinners = resp.countWin;
+        return resp;
+    }
+
+    async getWinners() {
+        const query = {
+            url: 'winners',
+            method: 'GET',
+            sort: 'time',
+            order: 'ASC',
+        };
+        const resp = await this.loader.getRespWins(this.query.queryMakerWinnersQuery(query));
+        return resp;
+    }
+
+    async getWinner(id: number) {
+        const res = await this.loader.getRespOneCar(
+            this.query.queryMakerGETOneQuery({ url: 'winners', method: 'GET', id: id })
+        );
+        return res as Promise<WinnerType | undefined>;
+        //console.log('get ', res);
+    }
+
+    async deleteWinner(id: number) {
+        await this.loader.deleteRespCar(this.query.queryMakerDELETEQuery({ url: 'winners', method: 'DELETE', id: id }));
+        //console.log('delete ', res);
+        return;
+    }
+
+    async updateWinner(dataCar: { wins: number; time: number; id: number }) {
+        const dataCarJSON = JSON.stringify(dataCar);
+        return (await this.loader.updateCar(
+            this.query.queryMakerUpdateQuery({
+                url: 'winners',
+                id: dataCar.id,
+                method: 'PUT',
+                header: { 'Content-Type': 'application/json' },
+                body: dataCarJSON,
+            })
+        )) as UpdateWinnerResponse;
+    }
+
+    /*
+    async createCar(dataCar: { name: string; color: string }) {
+        const dataCarJSON = JSON.stringify(dataCar);
+        await this.loader.createRespOneCar(
+            this.query.queryMakerPOSTQuery({
+                url: 'garage',
+                method: 'POST',
+                header: { 'Content-Type': 'application/json' },
+                body: dataCarJSON,
+            })
+        );
+        await this.start();
+    }
+    */
 }
 
 export default App;

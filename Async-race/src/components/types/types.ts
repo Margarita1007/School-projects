@@ -41,7 +41,7 @@ export type GetCarsContentResponse = {
 }[];
 
 export type GetOneCarQuery = {
-    url: 'garage';
+    url: string;
     method: 'GET';
     id: number;
 };
@@ -52,7 +52,7 @@ export type GetOneCarContentResponse = {
 } | {};
 
 export type CreateCarQuery = {
-    url: 'garage';
+    url: string;
     method: 'POST';
     header: {'Content-Type': 'application/json'};
     /* data: {
@@ -68,13 +68,13 @@ export type CreateCarContentResponse = {
 };
 
 export type DeleteCarQuery = {
-    url: 'garage';
+    url: string;
     method: 'DELETE';
     id: number;
 };
 
 export type UpdateCarQuery = {
-    url: 'garage';
+    url: string;
     method: 'PUT';
     header: {'Content-Type': 'application/json'};
     id: number;
@@ -84,6 +84,24 @@ export type UpdateCarQuery = {
     //     color: string;
     // }
 };
+
+export type WinnerDataType = {
+    name: string;
+    color: string;
+    id: number;
+    wins: number;
+    time: number;
+}
+
+export type GetWinnersQueryType = {
+    url: string;
+    method: string;
+    page?: number;
+    limit?: number;
+    sort: string;
+    order: string;
+}
+
 export type UpdateCarContentResponse = {
     name: string;
     color: string;
@@ -188,7 +206,7 @@ export interface QueryMakerInterface {
 }
 
 export interface LoaderInterface {
-    getResp: (query: {url: string, method: string}, page: number, limit: number) => Promise<{cars: GetCarsContentResponse, count: number}>;
+    getRespPage: (query: {url: string, method: string}, page: number, limit: number) => Promise<{cars: GetCarsContentResponse, count: number}>;
     createRespOneCar: (query: {url: string; method: string, header: {'Content-Type': 'application/json'}, body: string}) => Promise<CreateCarContentResponse>;
 }
 
@@ -211,15 +229,41 @@ export interface ControllerInterface {
 
 export interface StateInterface {
     pageGarage: number;
+    pageWinners: number,
     limit: number,
+    limitWin: number,
     cars: {
         name: string;
         color: string;
         id: number;
+    }[];
+    carsWin: {
+        id: number;
+        wins: number;
+        time: number;
     }[];
     countCar: number;
     countWinners: number;
     generateCount: number;
     view: string;
     sort?: string;
+}
+
+export type startDrive = {
+    id: number;
+    timeAnimation: number;
+    responce: DriveResponse | undefined;
+}
+
+export type RaceWinnerType = {
+    name?: string;
+    color?: string;
+    id?: number;
+    time?: number;
+}
+
+export type WinnerType = {
+    id: number;
+    wins: number;
+    time: number;
 }

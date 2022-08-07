@@ -3,15 +3,18 @@ import App from './components/app/app';
 //import Viewer from './components/viewer/viewer';
 import './global.css';
 import Buttons from './components/app/buttons';
+import Viewer from './components/viewer/viewer';
 //import Drive from './components/app/drive';
 
 const app = new App();
 const buttons = new Buttons();
+const view = new Viewer();
 //const drive = new Drive();
 //const controller = new Controller();
 
 const startApp = async () => {
     await app.start();
+    view.tableWinnersTemplate();
     buttons.addListenerButtons();
     buttons.pagination();
     buttons.addListenerDriving();

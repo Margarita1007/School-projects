@@ -4,16 +4,27 @@ import {
     LoaderInterface,
     StartStopEngineResponse,
     DriveResponse,
+    GetWinnersResponse,
+    UpdateWinnerResponse,
 } from '../types/types';
 // send a fetch request for specified query
 class Loader implements LoaderInterface {
-    async getResp(query: { url: string; method: string }, page: number, limit: number) {
+    async getRespPage(query: { url: string; method: string }, page: number, limit: number) {
         const resp = await fetch(`${query.url}?_page=${page}&_limit=${limit}`, { method: query.method });
         return {
             cars: (await resp.json()) as GetCarsContentResponse,
             count: Number(resp.headers.get('X-Total-Count')),
         };
         //return (await (await resp).json()) as GetCarsContentResponse;
+    }
+
+    async getResp(query: { url: string; method: string }) {
+        const resp = await fetch(`${query.url}`, { method: query.method });
+        // return {
+        //     cars: (await resp.json()) as GetCarsContentResponse,
+        //     count: Number(resp.headers.get('X-Total-Count')),
+        // };
+        return (await (await resp).json()) as GetCarsContentResponse;
     }
 
     async createRespOneCar(query: {
@@ -44,8 +55,21 @@ class Loader implements LoaderInterface {
             const jsonResp = await resp.json();
             return jsonResp;
         } else {
-            alert('Ошибка HTTP: ' + resp.status);
+            return undefined;
+            //console.log('Ошибка HTTP: ' + resp.status);
         }
+    }
+
+    async getRespOneWinner(query: { url: string; method: string }) {
+        const res = await fetch(query.url, { method: query.method })
+            .then((resp) => resp.json())
+            .catch((resp) => {
+                if (resp.status === 404) {
+                    console.log('ошибка 404');
+                    return undefined;
+                }
+            });
+        return await res;
     }
 
     async updateCar(query: {
@@ -55,16 +79,17 @@ class Loader implements LoaderInterface {
         body: string;
     }) {
         const resp = fetch(query.url, { method: query.method, headers: query.header, body: query.body });
-        return (await (await resp).json()) as UpdateCarContentResponse;
+        return (await (await resp).json()) as UpdateCarContentResponse | UpdateWinnerResponse;
     }
 
     async getStartStop(query: { url: string; method: string }) {
         const resp = await fetch(query.url, { method: query.method });
-        if (resp.ok) {
-            return (await resp.json()) as StartStopEngineResponse;
-        } else {
-            alert('Ошибка HTTP: ' + resp.status);
-        }
+        // if (resp.ok) {
+        //     return (await resp.json()) as StartStopEngineResponse;
+        // } else {
+        //     alert('Ошибка HTTP: ' + resp.status);
+        // }
+        return (await resp.json()) as StartStopEngineResponse;
     }
 
     async getDrive(query: { url: string; method: string }) {
@@ -77,6 +102,20 @@ class Loader implements LoaderInterface {
             //controller.abort();
             console.log('Ошибка HTTP: ' + resp.status);
         }
+    }
+
+    async getRespWinsPage(query: { url: string; method: string }) {
+        const resp = await fetch(`${query.url}`, { method: query.method });
+        //return (await resp.json()) as GetWinnersResponse;
+        return {
+            carsWin: (await resp.json()) as GetWinnersResponse,
+            countWin: Number(resp.headers.get('X-Total-Count')),
+        };
+    }
+
+    async getRespWins(query: { url: string; method: string }) {
+        const resp = await fetch(`${query.url}`, { method: query.method });
+        return (await resp.json()) as GetWinnersResponse;
     }
 }
 

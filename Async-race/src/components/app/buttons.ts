@@ -2,9 +2,12 @@ import App from './app';
 import Controller from './controller';
 import { state } from './state';
 import Drive from './drive';
+import Viewer from '../viewer/viewer';
+
 const app = new App();
 const controller = new Controller();
 const drive = new Drive();
+const view = new Viewer();
 
 class Buttons {
     addListenerButtons() {
@@ -16,6 +19,11 @@ class Buttons {
             if (eventTarget.classList.contains('garage__track__head__buttons-remove')) {
                 const id = +eventTarget.id.split('btn_remove_')[1];
                 await app.deleteCar(id.toString());
+                const getWins = await app.getWinners();
+                const foundWin = getWins.find((win) => win.id === id);
+                if (foundWin !== undefined) {
+                    await app.deleteWinner(id);
+                }
                 await app.start();
                 if (state.cars.length === 0 && state.pageGarage > 1) {
                     state.pageGarage--;
@@ -139,17 +147,45 @@ class Buttons {
             }
 
             if (eventTarget.classList.contains('main__buttons__race-race')) {
-                drive.raceAll();
+                //const btn_race = document.querySelector('.main__buttons__race-race') as HTMLElement;
+                const btn_reset = document.querySelector('.main__buttons__race-reset') as HTMLElement;
+                //const winner_text_div = document.querySelector('.winner_text') as HTMLElement;
+                //const winner_text = document.querySelector('.winner_text_scoreboard') as HTMLElement;
+                // btn_reset.classList.add('disabled');
+                const winner = await drive.race();
+                btn_reset.classList.remove('disabled');
+                //winner_text_div.classList.add('disabled');
+                await controller.NumberWins(winner);
+                // const cars = state.cars;
+                // cars.forEach((car) => {
+                //     const carBlock = document.getElementById(`img_block_${car.id}`) as HTMLElement;
+                //     carBlock.getAnimations({ subtree: true }).map((animation) => {
+                //         animation.addEventListener('finish', () => {
+                //             console.log(animation);
+                //         });
+                //     });
+                //     //const anim = carBlock.getAnimations();
+                // });
+                //console.log(animations);
+                // const carImgs = document.querySelectorAll('garage__track__line-vehicle');
+                // carImgs.forEach((img) => {
+                //     const animations = img.getAnimations();
+                //     console.log(animations);
+                // });
             }
 
             if (eventTarget.classList.contains('main__buttons__race-reset')) {
-                drive.resetRace();
+                await drive.resetRace();
+                const winner_text = document.querySelector('.winner_text_scoreboard') as HTMLElement;
+                const btn_race = document.querySelector('.main__buttons__race-race') as HTMLElement;
+                winner_text.innerHTML = '';
+                btn_race.classList.remove('disabled');
             }
         });
     }
 
     viewGarageWinners() {
-        document.body.addEventListener('click', (event) => {
+        document.body.addEventListener('click', async (event) => {
             const eventTarget = event.target as HTMLButtonElement;
             const btnToGarage = document.querySelector('.button_toGarage') as HTMLButtonElement;
             const btnToWinners = document.querySelector('.button_toWinners') as HTMLButtonElement;
@@ -169,6 +205,9 @@ class Buttons {
                 controller.lockUnlockElement(btnToWinners);
                 controller.lockUnlockElement(btnToGarage);
                 state.view = 'winners';
+                const data = await controller.getdataWins();
+                //console.log(data);
+                view.tableWinners(data);
             }
         });
     }

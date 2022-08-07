@@ -53,11 +53,11 @@ body {
 .main__garage {
     display: flex;
     flex-direction: column;
-    row-gap: 40px;
-    height: 1150px;
+    row-gap: 30px;
+    height: 1000px;
 }
 .main__pagination {
-    margin: 50px 0;
+    margin: 0;
     display: flex;
     flex-direction: row;
     column-gap: 2%;
@@ -141,12 +141,65 @@ body {
     width: 100px;
 }
 
-#biew_winners {
+#view_winners {
     display: none;
 }
 
 .winners_table {
     border: 2px;
 }
+
+.table {
+	width: 100%;
+	margin-bottom: 20px;
+	border: 1px solid #dddddd;
+	border-collapse: collapse;
+    text-align: center;
+}
+.table th {
+	font-weight: bold;
+	padding: 5px;
+	background: #efefef;
+	border: 1px solid #dddddd;
+}
+.table td {
+	border: 1px solid #dddddd;
+	padding: 5px;
+}
+
+.col_first {
+    color: beige;
+}
+
+.winner-vehicle-img {
+    width: 100px;
+}
+
+.winner_text h2 {
+    margin: 0;
+}
+
+.winner_text {
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+}
+
+.main__garage_pagination_row {
+    display: flex;
+    flex-direction: row;
+}
+
+@keyframes drive {
+    from {
+      margin-left: 100%;
+      width: 300%;
+    }
+  
+    to {
+      margin-left: 0%;
+      width: 100%;
+    }
+  }
 
 
