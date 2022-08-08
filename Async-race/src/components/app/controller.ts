@@ -1,6 +1,9 @@
 import { ControllerInterface, RaceWinnerType, WinnerDataType } from '../types/types';
 import App from './app';
+import { state } from './state';
+import Viewer from '../viewer/viewer';
 const app = new App();
+const view = new Viewer();
 
 class Controller implements ControllerInterface {
     addListener(elements: NodeList | HTMLElement, event: string, callback: () => void) {
@@ -120,6 +123,24 @@ class Controller implements ControllerInterface {
         return winData;
     }
 
+    async getdataWinsPage() {
+        console.log('stateWin', state.pageWinners);
+        const dataWins = await app.getWinnersPage();
+        const dataCar = await app.getGarage();
+        const winData: WinnerDataType[] = [];
+        dataWins.carsWin.forEach((win) => {
+            dataCar.forEach((car) => {
+                if (car.id === win.id) {
+                    const elem = Object.assign({}, car, win);
+                    winData.push(elem);
+                }
+            });
+        });
+        console.log('dataWin', dataWins);
+        console.log('dataCar', dataCar);
+        return winData;
+    }
+
     async NumberWins(winner: RaceWinnerType) {
         if (winner.id && winner.time) {
             //const getWin = await app.getWinner(winner.id);
@@ -150,6 +171,98 @@ class Controller implements ControllerInterface {
                 }
             }
         }
+    }
+
+    paginationWinners() {
+        // const paginator = document.querySelector('.winners_page') as HTMLElement;
+        const nextButtonWin = document.querySelector('.winners__pagination_next') as HTMLButtonElement;
+        const prevButtonWin = document.querySelector('.winners__pagination_prev') as HTMLButtonElement;
+
+        if (state.pageWinners * state.limitWin > state.countWinners) {
+            nextButtonWin.classList.add('disabled');
+        }
+
+        document.body.addEventListener('click', async (event) => {
+            const eventTarget = event.target as HTMLButtonElement;
+            if (eventTarget === nextButtonWin) {
+                state.pageWinners++;
+                const wins = await this.getdataWinsPage();
+                view.tableWinners(wins);
+            }
+            if (eventTarget === prevButtonWin) {
+                state.pageWinners--;
+                const wins = await this.getdataWinsPage();
+                view.tableWinners(wins);
+            }
+
+            // if (paginator) {
+            //     paginator.innerHTML = state.pageWinners.toString();
+            //     //const wins = await this.getdataWinsPage();
+            //     //view.tableWinners(wins);
+            //     //console.log(state.pageGarage);
+            // }
+
+            if (state.pageWinners === 1) {
+                prevButtonWin.classList.add('disabled');
+                nextButtonWin.classList.remove('disabled');
+            } else {
+                prevButtonWin.classList.remove('disabled');
+            }
+
+            if (state.pageWinners * state.limitWin < state.countWinners) {
+                nextButtonWin.classList.remove('disabled');
+            } else {
+                nextButtonWin.classList.add('disabled');
+            }
+        });
+    }
+
+    sortWinners() {
+        const sort__time_up = document.getElementById('sort__time_up') as HTMLElement;
+        const sort__time_down = document.getElementById('sort__time_down') as HTMLElement;
+        const sort__wins_up = document.getElementById('sort__wins_up') as HTMLElement;
+        const sort__wins_down = document.getElementById('sort__wins_down') as HTMLElement;
+        //const sort__name_up = document.getElementById('sort__name_up') as HTMLElement;
+        //const sort__name_down = document.getElementById('sort__name_down') as HTMLElement;
+        document.body.addEventListener('click', async (event) => {
+            const eventTarget = event.target as HTMLElement;
+            if (eventTarget === sort__time_up) {
+                state.sort = 'time';
+                state.sortOrder = 'ASC';
+                const wins = await this.getdataWinsPage();
+                view.tableWinners(wins);
+            }
+            if (eventTarget === sort__time_down) {
+                state.sort = 'time';
+                state.sortOrder = 'DESC';
+                const wins = await this.getdataWinsPage();
+                view.tableWinners(wins);
+            }
+            if (eventTarget === sort__wins_up) {
+                state.sort = 'wins';
+                state.sortOrder = 'ASC';
+                const wins = await this.getdataWinsPage();
+                view.tableWinners(wins);
+            }
+            if (eventTarget === sort__wins_down) {
+                state.sort = 'wins';
+                state.sortOrder = 'DESC';
+                const wins = await this.getdataWinsPage();
+                view.tableWinners(wins);
+            }
+            // if (eventTarget === sort__name_up) {
+            //     state.sort = 'id';
+            //     state.sortOrder = 'ASC';
+            //     const wins = await this.getdataWinsPage();
+            //     view.tableWinners(wins);
+            // }
+            // if (eventTarget === sort__name_down) {
+            //     state.sort = 'id';
+            //     state.sortOrder = 'DESC';
+            //     const wins = await this.getdataWinsPage();
+            //     view.tableWinners(wins);
+            // }
+        });
     }
 }
 

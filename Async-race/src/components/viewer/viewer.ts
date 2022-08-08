@@ -5,25 +5,16 @@ import {
     ViewerInterface,
     WinnerDataType,
 } from '../types/types';
-//import { state } from '../app/state';
+import { state } from '../app/state';
 
 class Viewer implements ViewerInterface {
     viewGarage(respData: GetCarsContentResponse) {
-        //state.cars = [];
-        //const fragment = document.createDocumentFragment();
-        //const garageTemp = document.querySelector<HTMLTemplateElement>('#garage');
-        // fill garage from template according to response
         respData.forEach((car) => {
-            //state.cars.push(car);
             this.viewOneCar(car);
         });
-        //console.log(state.cars);
     }
 
     viewOneCar(car: CreateCarContentResponse) {
-        //state.cars.push(car);
-        //state.countCar++;
-        //console.log(state.countCar);
         const fragment = document.createDocumentFragment();
         const oneCarTemp = document.querySelector<HTMLTemplateElement>('#one_car');
         if (oneCarTemp) {
@@ -78,11 +69,6 @@ class Viewer implements ViewerInterface {
         const tableTemp = document.querySelector<HTMLTemplateElement>('#winners_table');
         if (tableTemp) {
             const tableClone = <Element>tableTemp.content.cloneNode(true);
-            // const tableNumber = document.querySelector('.table_number') as HTMLTableElement;
-            // const tableCar = document.querySelector('.table_car') as HTMLTableElement;
-            // const tableName = document.querySelector('.table_name') as HTMLTableElement;
-            // const tableWins = document.querySelector('.table_wins') as HTMLTableElement;
-            // const tableTime = document.querySelector('.table_time') as HTMLTableElement;
             fragment.append(tableClone);
         }
         const divSelect = document.getElementById('view_winners');
@@ -92,8 +78,6 @@ class Viewer implements ViewerInterface {
     }
 
     tableWinners(data: WinnerDataType[]) {
-        //const rows = data.length;
-        //const cells = 5;
         const table = document.getElementById('table_body') as HTMLTableElement;
         table.remove();
 
@@ -105,9 +89,8 @@ class Viewer implements ViewerInterface {
             tableSelect.append(table);
             for (let i = 0; i < data.length; i++) {
                 const newrow = table.insertRow(-1);
-                newrow.insertCell(0).innerHTML = `${i + 1}`;
+                newrow.insertCell(0).innerHTML = `${(state.pageWinners - 1) * state.limitWin + i + 1}`;
                 const imgCell = newrow.insertCell(1);
-                //.innerHTML = `<img class="winner-vehicle-img" src="./assets/car.png">`;
                 const img = document.createElement('img');
                 img.src = './assets/car.png';
                 img.alt = 'vehicle';
@@ -118,21 +101,13 @@ class Viewer implements ViewerInterface {
                 newrow.insertCell(3).innerHTML = `${data[i].wins}`;
                 newrow.insertCell(4).innerHTML = `${data[i].time}`;
             }
+            const winners_countHTML = document.querySelector('.winners_count') as HTMLElement;
+            winners_countHTML.innerHTML = `${state.countWinners} cars`;
+            const paginator = document.querySelector('.winners_page') as HTMLElement;
+            paginator.innerHTML = `${state.pageWinners}`;
+            console.log(state.pageWinners);
+            console.log(state.countWinners);
         }
-
-        // function tableFill() {
-        //     const col1 = document.querySelector('.col_first') as HTMLTableColElement;
-        //     for (let i = 0; i < data.length; i++) {
-        //         col1[i].textContent
-        //     }
-        //     // let fillFrom = 27;
-        //     // const td = document.querySelectorAll('#table td') as NodeListOf<HTMLTableSectionElement>;
-
-        //     // for (let i = 0; i < td.length; i++) {
-        //     //     td[i].textContent = `${fillFrom--}`;
-        //     //     if (fillFrom < 1) break;
-        //     // }
-        // }
     }
 }
 

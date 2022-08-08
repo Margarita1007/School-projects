@@ -4,6 +4,11 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="./assets/sport-car.png" rel ="icon" type="image/x icon">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300|Sonsie+One" rel="stylesheet" type="text/css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap" rel="stylesheet">
     <title>ASYNC race</title>
 </head>
 <body>
@@ -25,31 +30,31 @@
                 <div class="main__buttons__create main-buttons">
                     <input type="text" id="create__name" name="create">
                     <input type="color" id="create__color" name="create">
-                    <button class="main__buttons__create-create" type="button" name="create">CREATE</button>
+                    <button class="main__buttons__create-create button" type="button" name="create">CREATE</button>
                 </div>
                 <div class="main__buttons__update main-buttons disabled">
                     <input type="text" id="update__name" name="update">
                     <input type="color" id="update__color" name="update">
-                    <button class="main__buttons__update button_update" type="button" name="update">UPDATE</button>
+                    <button class="main__buttons__update button_update button" type="button" name="update">UPDATE</button>
                 </div>
                 <div class="main__buttons__race main-buttons">
-                    <button class="main__buttons__race-race" type="button" name="race">RACE</button>
-                    <button class="main__buttons__race-reset" type="button" name="reset">RESET</button>
-                    <button class="main__buttons__race-generate" type="button" name="generate">GENERATE CARS</button>
+                    <button class="main__buttons__race-race button" type="button" name="race">RACE</button>
+                    <button class="main__buttons__race-reset button" type="button" name="reset">RESET</button>
+                    <button class="main__buttons__race-generate button" type="button" name="generate">GENERATE CARS</button>
                 </div>
             </div>
             <div class="main__garage">
                 <div class="garage__head">
                     <h2>Garage: <span class="garage_count"></span> </h2>
                     <h3>Page <span class="garage__head-page-number">1</span> <span>/</span> <span class="garage_pages"> </span></h3>
-                </div>
-                <div class="main__garage_pagination_row">
-                    <div class="main__pagination">
-                        <button class="main__pagination-prev disabled" type="button" name="prev">PREV</button>
-                        <button class="main__pagination-next disabled" type="button" name="next">NEXT</button>
-                    </div>
-                    <div class="winner_text">
-                        <h2><span class='winner_text_scoreboard'></span></h2>
+                    <div class="main__garage_pagination_row">
+                        <div class="main__pagination">
+                            <button class="main__pagination-prev disabled button button_pag" type="button" name="prev">PREV</button>
+                            <button class="main__pagination-next disabled button button_pag" type="button" name="next">NEXT</button>
+                        </div>
+                        <div class="winner_text">
+                            <h2><span class='winner_text_scoreboard'></span></h2>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -61,30 +66,40 @@
         </div>
     </main>
 
-    <footer>
-        <div class="footer-wrapper">
-            <p class="footer__github">
-                <a class="footer__github-a" target="_blank" href="#">github</a>, 2022
-            </p>
-            <div class="footer__rsschool">
-                <a target="_blank" href="https://rs.school/js/"><img class="footer__rsschool-img" src="./assets/rsschool.png" alt="RSSchool logo"></a>
+    <footer id='footer'>
+        <div class="wrapper-footer">  
+            <div class="footer-info">   
+                <div class="footer-git"> 
+                    <a href="https://github.com/Margarita1007">
+                        <img id="git-img" src="./assets/github_git_icon.png" alt="git">
+                    </a>
+                    <a href="https://github.com/Margarita1007">
+                        <p>Margarita Bakulina</p>
+                    </a>
+                </div>
+                <div class="footer-p">
+                    <p>© 2022</p>
+                </div>
+                <div class="footer-rss"><a href="https://rs.school/js/">
+                    <img id="rss-img" src="./assets/rs_school_js.svg" rel="icon" alt="rss">
+                </a></div> 
             </div>
         </div>
-    </footer>
+      </footer>
 
     <template id="one_car">
         <div class="garage__track">
             <div class="garage__track__head">
                 <div class="garage__track__head__buttons">
-                    <button class="garage__track__head__buttons-select" type="button" name="select">SELECT</button>
-                    <button class="garage__track__head__buttons-remove" type="button" name="remove">REMOVE</button>
+                    <button class="garage__track__head__buttons-select button" type="button" name="select">SELECT</button>
+                    <button class="garage__track__head__buttons-remove button" type="button" name="remove">REMOVE</button>
                 </div>
                 <span class="garage__track__head-name"></span>
             </div>
             <div class="garage__track__line">
                 <div class="garage__track__line__buttons">
-                    <button class="garage__track__line__buttons-start" type="button" name="start">START</button>
-                    <button class="garage__track__line__buttons-stop disabled" type="button" name="stop">STOP</button>
+                    <button class="garage__track__line__buttons-start button" type="button" name="start">START</button>
+                    <button class="garage__track__line__buttons-stop disabled button" type="button" name="stop">STOP</button>
                 </div>
                 <div class="garage__track__line-vehicle">
                     <div class="drive_text"> 
@@ -101,8 +116,8 @@
     </template>
 
     <template id="winners_table">
-        <button>PREV</button>
-        <button>NEXT</button>
+        <button class="winners__pagination_prev button button_pag">PREV</button>
+        <button class="winners__pagination_next button button_pag">NEXT</button>
         <table class="table" id="table">
             <caption>Winners</caption>
             <colgroup>
@@ -116,9 +131,16 @@
             <thead>
               <th class="table_number">Number</th>
               <th>Car</th>
-              <th>Name</th>
-              <th class="table-btn table-wins-btn" id="sort-by-wins">Wins</th>
-              <th class="table-btn table-time-btn" id="sort-by-time">Best time (seconds)</th>
+              <th>Name</th>              
+              <th class="table-btn table-wins-btn" id="sort-by-wins">
+                <button class="button" id="sort__wins_up">&uarr;</button>
+                Wins
+                <button class="button" id="sort__wins_down">&darr;</button></th>
+              <th>
+                <button class="button" id="sort__time_up">&uarr;</button>
+                Best time (seconds)
+                <button class='button' id="sort__time_down">&darr;</button>
+            </th>
             </thead>
             <tbody id="table_body"> 
               <tr>

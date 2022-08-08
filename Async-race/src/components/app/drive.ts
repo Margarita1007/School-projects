@@ -1,9 +1,9 @@
-//import { DriveResponse } from '../types/types';
-//import { DriveResponse } from '../types/types';
 import { RaceWinnerType, startDrive, StartStopEngineResponse } from '../types/types';
 import App from './app';
+import Controller from './controller';
 import { state } from './state';
 const app = new App();
+const controller = new Controller();
 
 class Drive {
     async startEngine(id: number): Promise<startDrive> {
@@ -39,7 +39,6 @@ class Drive {
         carBlock.style.transform = `translate(0)`;
         brokenText.style.opacity = '0';
         finishText.style.opacity = '0';
-        //stopButton.classList.remove('disabled');
     }
 
     async race() {
@@ -56,15 +55,11 @@ class Drive {
             promises,
             state.cars.map((car) => car.id)
         );
-        //const winner_text_div = document.querySelector('.winner_text') as HTMLElement;
+        await controller.NumberWins(winner);
         const winner_text = document.querySelector('.winner_text_scoreboard') as HTMLElement;
-        //winner_text_div.classList.remove('disabled');
-        winner_text.innerHTML = `Win ${winner.name}, time ${winner.time}`;
+        winner_text.innerHTML = `${winner.name} is winner,\ntime ${winner.time} c`;
         console.log(winner);
         await Promise.all(promises);
-        // if (winner) {
-        //     console.log(`Win ${winner}`);
-        // }
         return winner;
     }
 
@@ -81,24 +76,6 @@ class Drive {
         }
         return { ...state.cars.find((car) => car.id === id), time: +(timeAnimation / 1000).toFixed(2) };
     }
-
-    //const promises: any = [];
-    // cars.forEach(async (car) => {
-    //     await this.startEngine(car.id);
-    //     //const carBlock = document.getElementById(`img_block_${car.id}`) as HTMLElement;
-    // });
-    // const promises = cars.map(async (car) => {
-    //     const res = await this.startEngine(car.id);
-    //     return res;
-    // });
-    //const promise = Promise.allSettled(promises);
-    // cars.forEach((car) => {
-    //     const carBlock = document.getElementById(`img_block_${car.id}`) as HTMLElement;
-    //     console.log(carBlock.getAnimations());
-    //     //carBlock.getAnimations({ subtree: true }).map((animation) => console.log(animation));
-    // });
-    //const res = result.filter((car) => car);
-    //promise.then(console.log);
 
     raceAllAnimate() {
         document.getAnimations().forEach(async (animation) => {
@@ -119,13 +96,13 @@ class Drive {
         const finishText = document.getElementById(`finish_${id}`);
         if (carBlock && width) {
             const animation = carBlock.animate(
-                [{ transform: `translate(0)` }, { transform: `translate(${width - 290}px, 0)` }],
+                [{ transform: `translate(0)` }, { transform: `translate(${width - 245}px, 0)` }],
                 timeAnimation
             );
             if (animation) {
                 animation.addEventListener('finish', function () {
                     if (carBlock && finishText) {
-                        carBlock.style.transform = `translate(${width - 290}px, 0)`;
+                        carBlock.style.transform = `translate(${width - 245}px, 0)`;
                         finishText.style.opacity = '1';
                     }
                 });

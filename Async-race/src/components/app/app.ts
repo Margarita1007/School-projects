@@ -4,7 +4,6 @@ import { AppInterface, UpdateCarContentResponse, UpdateWinnerResponse, WinnerTyp
 import Viewer from '../viewer/viewer';
 import { state } from './state';
 
-// start of app
 class App implements AppInterface {
     view: Viewer;
     query: QueryMaker;
@@ -38,18 +37,6 @@ class App implements AppInterface {
             garage_pages.innerHTML = `${pages}`;
             paginator.innerHTML = `${state.pageGarage}`;
         }
-        // if (garage_pages && paginator) {
-        //     if (pages === 0 || state.pageGarage === 0) {
-        //         garage_pages.innerHTML = '1';
-        //         paginator.innerHTML = '1';
-        //     } else {
-        //         garage_pages.innerHTML = `${pages}`;
-        //         paginator.innerHTML = `${state.pageGarage}`;
-        //     }
-        // }
-        //console.log(state.pageGarage);
-        //console.log(state.cars);
-        //console.log(state.pageGarage);
     }
 
     async getGarage() {
@@ -87,7 +74,6 @@ class App implements AppInterface {
         await this.loader.deleteRespCar(
             this.query.queryMakerDELETEQuery({ url: 'garage', method: 'DELETE', id: idCar })
         );
-        //console.log('delete ', res);
         return;
     }
 
@@ -96,7 +82,6 @@ class App implements AppInterface {
         const res = await this.loader.getRespOneCar(
             this.query.queryMakerGETOneQuery({ url: 'garage', method: 'GET', id: idCar })
         );
-        //console.log('get ', res);
         return res;
     }
 
@@ -146,8 +131,8 @@ class App implements AppInterface {
             method: 'GET',
             page: state.pageWinners,
             limit: state.limitWin,
-            sort: 'time',
-            order: 'ASC',
+            sort: state.sort,
+            order: state.sortOrder,
         };
         const resp = await this.loader.getRespWinsPage(this.query.queryMakerWinnersPageQuery(query));
         state.carsWin = resp.carsWin;
@@ -171,12 +156,10 @@ class App implements AppInterface {
             this.query.queryMakerGETOneQuery({ url: 'winners', method: 'GET', id: id })
         );
         return res as Promise<WinnerType | undefined>;
-        //console.log('get ', res);
     }
 
     async deleteWinner(id: number) {
         await this.loader.deleteRespCar(this.query.queryMakerDELETEQuery({ url: 'winners', method: 'DELETE', id: id }));
-        //console.log('delete ', res);
         return;
     }
 
@@ -192,21 +175,6 @@ class App implements AppInterface {
             })
         )) as UpdateWinnerResponse;
     }
-
-    /*
-    async createCar(dataCar: { name: string; color: string }) {
-        const dataCarJSON = JSON.stringify(dataCar);
-        await this.loader.createRespOneCar(
-            this.query.queryMakerPOSTQuery({
-                url: 'garage',
-                method: 'POST',
-                header: { 'Content-Type': 'application/json' },
-                body: dataCarJSON,
-            })
-        );
-        await this.start();
-    }
-    */
 }
 
 export default App;

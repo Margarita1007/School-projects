@@ -13,7 +13,6 @@ class Buttons {
     addListenerButtons() {
         document.body.addEventListener('click', async (event) => {
             const eventTarget = event.target as HTMLButtonElement;
-            //const parentBTNREmove = eventTarget.parentNode?.parentNode?.parentNode as HTMLElement;
             const updateBlock = document.querySelector('.main__buttons__update') as HTMLElement;
 
             if (eventTarget.classList.contains('garage__track__head__buttons-remove')) {
@@ -27,22 +26,20 @@ class Buttons {
                 await app.start();
                 if (state.cars.length === 0 && state.pageGarage > 1) {
                     state.pageGarage--;
-                    //console.log('as');
                     await app.start();
                 }
-                //parentBTNREmove.remove();
-                //console.log('remove btn', id);
-                //this.pagination();
             }
-
             if (eventTarget.classList.contains('main__buttons__create-create')) {
                 const dataCar = controller.readOptionsForCreateQuery();
                 await app.createCar(dataCar.data); //view
                 const nextButton = document.querySelector('.main__pagination-next') as HTMLButtonElement;
+                const createName = (<HTMLInputElement>document.getElementById('create__name')) as HTMLInputElement;
+                const createColor = (<HTMLInputElement>document.getElementById('create__color')) as HTMLInputElement;
+                createName.value = '';
+                createColor.value = '#000000';
                 if (state.pageGarage * state.limit < state.countCar) {
                     nextButton.classList.remove('disabled');
                 }
-                //this.pagination();
             }
 
             if (
@@ -53,22 +50,16 @@ class Buttons {
                 const data = await app.getCar(id.toString());
                 const updateName = (<HTMLInputElement>document.getElementById('update__name')) as HTMLInputElement;
                 const updateColor = (<HTMLInputElement>document.getElementById('update__color')) as HTMLInputElement;
-                // const updateBlock = document.querySelector('.main__buttons__update') as HTMLElement;
-                const updateButton = document.querySelector('.button_update');
-                if (updateBlock) {
-                    controller.lockUnlockElement(updateBlock);
-                }
+                const updateButton = document.querySelector('.button_update') as HTMLElement;
+                controller.lockUnlockElement(updateBlock);
                 updateName.value = data.name;
                 updateColor.value = data.color;
-                //console.log(data);
-                updateButton?.addEventListener(
+                updateButton.addEventListener(
                     'click',
                     async () => {
                         controller.lockUnlockElement(updateBlock);
                         const dataNew = controller.readOptionsForUpdateQuery(id);
-                        //console.log(dataNew.data);
                         await app.updateCar(dataNew.data);
-                        //app.clear();
                         updateName.value = '';
                         updateColor.value = '#000000';
                         await app.start();
@@ -85,8 +76,6 @@ class Buttons {
                 if (state.pageGarage * state.limit < state.countCar) {
                     nextButton.classList.remove('disabled');
                 }
-                //await Promise.all(generateCars.map(async (car) => await app.createCar(car)));
-                //this.pagination();
             }
         });
     }
@@ -113,8 +102,6 @@ class Buttons {
 
             if (paginator) {
                 paginator.innerHTML = state.pageGarage.toString();
-                //app.start();
-                //console.log(state.pageGarage);
             }
 
             if (state.pageGarage === 1) {
@@ -135,7 +122,6 @@ class Buttons {
     addListenerDriving() {
         document.body.addEventListener('click', async (event) => {
             const eventTarget = event.target as HTMLButtonElement;
-            //const width = document.querySelector('.garage__track__line')?.clientWidth;
             if (eventTarget.classList.contains('garage__track__line__buttons-start')) {
                 const id = +eventTarget.id.split('btn_start_')[1];
                 drive.startEngine(id);
@@ -147,31 +133,9 @@ class Buttons {
             }
 
             if (eventTarget.classList.contains('main__buttons__race-race')) {
-                //const btn_race = document.querySelector('.main__buttons__race-race') as HTMLElement;
                 const btn_reset = document.querySelector('.main__buttons__race-reset') as HTMLElement;
-                //const winner_text_div = document.querySelector('.winner_text') as HTMLElement;
-                //const winner_text = document.querySelector('.winner_text_scoreboard') as HTMLElement;
-                // btn_reset.classList.add('disabled');
-                const winner = await drive.race();
+                await drive.race();
                 btn_reset.classList.remove('disabled');
-                //winner_text_div.classList.add('disabled');
-                await controller.NumberWins(winner);
-                // const cars = state.cars;
-                // cars.forEach((car) => {
-                //     const carBlock = document.getElementById(`img_block_${car.id}`) as HTMLElement;
-                //     carBlock.getAnimations({ subtree: true }).map((animation) => {
-                //         animation.addEventListener('finish', () => {
-                //             console.log(animation);
-                //         });
-                //     });
-                //     //const anim = carBlock.getAnimations();
-                // });
-                //console.log(animations);
-                // const carImgs = document.querySelectorAll('garage__track__line-vehicle');
-                // carImgs.forEach((img) => {
-                //     const animations = img.getAnimations();
-                //     console.log(animations);
-                // });
             }
 
             if (eventTarget.classList.contains('main__buttons__race-reset')) {
@@ -191,7 +155,6 @@ class Buttons {
             const btnToWinners = document.querySelector('.button_toWinners') as HTMLButtonElement;
             const viewGarage = document.getElementById('view_garage') as HTMLElement;
             const viewWinners = document.getElementById('view_winners') as HTMLElement;
-            //const width = document.querySelector('.garage__track__line')?.clientWidth;
             if (eventTarget === btnToGarage) {
                 viewWinners.style.display = 'none';
                 viewGarage.style.display = 'block';
@@ -205,9 +168,14 @@ class Buttons {
                 controller.lockUnlockElement(btnToWinners);
                 controller.lockUnlockElement(btnToGarage);
                 state.view = 'winners';
-                const data = await controller.getdataWins();
-                //console.log(data);
+                const data = await controller.getdataWinsPage();
                 view.tableWinners(data);
+                const nextButtonWin = document.querySelector('.winners__pagination_next') as HTMLButtonElement;
+                if (state.pageWinners * state.limitWin < state.countWinners) {
+                    nextButtonWin.classList.remove('disabled');
+                } else {
+                    nextButtonWin.classList.add('disabled');
+                }
             }
         });
     }

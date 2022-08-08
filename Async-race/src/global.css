@@ -1,6 +1,7 @@
 body {
     background-color: white;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: 600;
 }
 
 .disabled {
@@ -18,6 +19,12 @@ body {
 .header__logo img{
     width: 80%;
 }
+
+.header__logo {
+    display: flex;
+    justify-content: center;
+}
+
 .header__buttons {
     display: flex;
     flex-direction: row;
@@ -26,16 +33,12 @@ body {
     margin-right: auto;
 }
 .header__buttons-button {
-    border-color: beige;
     border-radius: 5px;
     width: 160px;
     height: 40px;
     cursor: pointer;
-    background-color: rgb(244, 248, 170);
 }
-.button:hover {
-    border-color: green;
-}
+
 .main-wrapper {
     margin: 50px 5%;
 }
@@ -77,14 +80,11 @@ body {
     flex-direction: row;
     column-gap: 2%;
 }
-.garage__track__head__buttons {
-    display: flex;
-    flex-direction: row;
-    column-gap: 2%;
-}
+
 .garage__track__line {
     display: flex;
     flex-direction: row;
+    align-items: center;
 }
 .garage__track__line-vehicle {
     width: 100px;
@@ -107,38 +107,88 @@ body {
 }
 .garage__track__line-finish {
     position: absolute;
-    right: 200px;
+    right: 165px;
     z-index: 10;
     align-self: end;
 }
-.garage__track__line__buttons {
+
+.garage__track__line__buttons-start, .garage__track__line__buttons-stop,
+.garage__track__head__buttons-select, .garage__track__head__buttons-remove {
+    width: 65px;
+}
+
+.garage__track__line__buttons, .garage__track__head__buttons {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
     width: 140px;
+    height: fit-content;
 }
-/* .garage__track__line__buttons-start, .garage__track__line__buttons-stop {
+
+.main__buttons__race-race, .main__buttons__race-reset {
+    width: 80px;
+    height: 30px;
+}
+
+.main__buttons__race-generate {
+    width: 130px;
+    height: 30px;
+}
+
+.button_pag {
     width: 70px;
     height: 30px;
-} */
+    background-color: #b3b2b2;
+}
 
-.footer-wrapper {
+.footer-info {
+    height: 50px;
+    margin: 5% 0 0 0;
     display: flex;
     flex-direction: row;
     align-items: center;
-    margin: 50px auto;
-    justify-content: space-around;
+    justify-content: center;
+    background-color: #BF3030;
+    color: #000;
+    font-weight: 500;
+    background-size: cover;
+    font-family: 'Ubuntu', sans-serif;
+    text-align: center;
+}
 
+.footer-git, .footer-p, .footer-rss {
+    width: 33%;
 }
-.footer__github {
-    color: rgb(254, 5, 5);
+
+.footer-rss {
+    position: relative;
+    height: 100%;
 }
-.footer__github-a {
+
+.footer-git {
+    display: flex;
+    flex-direction: row;
+    color: #000;
+    gap: 10px;
+}
+
+.footer-git a {
     text-decoration: none;
-    color: rgb(41, 40, 40);
+    color: #000;
 }
-.footer__rsschool-img {
-    width: 100px;
+
+#git-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+#rss-img {
+    position: absolute;
+    right: 0;
+    object-fit: cover;
+    height: 100%;
+    
 }
 
 #view_winners {
@@ -167,10 +217,6 @@ body {
 	padding: 5px;
 }
 
-.col_first {
-    color: beige;
-}
-
 .winner-vehicle-img {
     width: 100px;
 }
@@ -183,6 +229,10 @@ body {
     display: flex;
     justify-content: center;
     margin: 0 auto;
+    color: #BF3030;
+    white-space: pre-line;
+    text-align: center;
+    font-weight: 600;
 }
 
 .main__garage_pagination_row {
@@ -190,16 +240,19 @@ body {
     flex-direction: row;
 }
 
-@keyframes drive {
-    from {
-      margin-left: 100%;
-      width: 300%;
-    }
-  
-    to {
-      margin-left: 0%;
-      width: 100%;
-    }
-  }
+.button {
+    font-weight: 600;
+    color: #BF3030	;
+    text-decoration: none;
+    padding: 0.4em;
+    border-radius: 3px;
+    border: none;
+    box-shadow: 0 0 0.2em rgba(0, 0, 0, .8);
+    font-family: 'Ubuntu', sans-serif;
+}
 
-
+.button:hover {
+    cursor: pointer;
+    background-color: #BF3030;
+    color: #000;
+}

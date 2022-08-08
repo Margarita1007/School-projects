@@ -10,9 +10,9 @@ export const state: StateInterface = {
     carsWin: [],
     //winners: [],
     countCar: 0,
-    generateCount: 10,
+    generateCount: 100,
     countWinners: 0,
     view: 'garage',
-    //sort: "time",
-    //sortOrder: "asc",
+    sort: 'time',
+    sortOrder: 'ASC',
 };

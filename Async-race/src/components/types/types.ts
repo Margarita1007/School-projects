@@ -1,4 +1,3 @@
-import ButtonsEvent from "../app/buttons";
 import Loader from "../loader/loader";
 import QueryMaker from "../loader/query-maker";
 import Viewer from "../viewer/viewer";
@@ -194,13 +193,6 @@ export type UpdateWinnerResponse = {
 
 export interface QueryMakerInterface {
     baseLink: string;
-    makeQueryParamPage: (options: QueryGeneral) => string;
-    makeQueryParamLimit: (options: QueryGeneral) => string;
-    makeQueryParamSort: (options: QueryGeneral) => string;
-    makeQueryParamOrder: (options: QueryGeneral) => string;
-    makeQueryParamID: (options: QueryGeneral) => string;
-    makeQueryParamStatus: (options: QueryGeneral) => string;
-    makeUrlParamID: (options: QueryGeneral) => string;
     queryMakerMethod: (options: QueryGeneral) => {url: string, method: string};
     queryMakerPOSTQuery: (options: CreateCarQuery) => {url: string, method: string, header: {'Content-Type': 'application/json'}, body: string};
 }
@@ -246,7 +238,8 @@ export interface StateInterface {
     countWinners: number;
     generateCount: number;
     view: string;
-    sort?: string;
+    sort: string;
+    sortOrder : string;
 }
 
 export type startDrive = {

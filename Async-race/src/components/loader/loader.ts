@@ -7,7 +7,7 @@ import {
     GetWinnersResponse,
     UpdateWinnerResponse,
 } from '../types/types';
-// send a fetch request for specified query
+
 class Loader implements LoaderInterface {
     async getRespPage(query: { url: string; method: string }, page: number, limit: number) {
         const resp = await fetch(`${query.url}?_page=${page}&_limit=${limit}`, { method: query.method });
@@ -15,15 +15,10 @@ class Loader implements LoaderInterface {
             cars: (await resp.json()) as GetCarsContentResponse,
             count: Number(resp.headers.get('X-Total-Count')),
         };
-        //return (await (await resp).json()) as GetCarsContentResponse;
     }
 
     async getResp(query: { url: string; method: string }) {
         const resp = await fetch(`${query.url}`, { method: query.method });
-        // return {
-        //     cars: (await resp.json()) as GetCarsContentResponse,
-        //     count: Number(resp.headers.get('X-Total-Count')),
-        // };
         return (await (await resp).json()) as GetCarsContentResponse;
     }
 
@@ -39,8 +34,6 @@ class Loader implements LoaderInterface {
 
     async deleteRespCar(query: { url: string; method: string }) {
         const resp = await fetch(query.url, { method: query.method });
-        //const jsonResp = await resp.json();
-        //return jsonResp;
         if (resp.ok) {
             const jsonResp = await resp.json();
             return jsonResp;
@@ -56,7 +49,6 @@ class Loader implements LoaderInterface {
             return jsonResp;
         } else {
             return undefined;
-            //console.log('Ошибка HTTP: ' + resp.status);
         }
     }
 
@@ -84,29 +76,20 @@ class Loader implements LoaderInterface {
 
     async getStartStop(query: { url: string; method: string }) {
         const resp = await fetch(query.url, { method: query.method });
-        // if (resp.ok) {
-        //     return (await resp.json()) as StartStopEngineResponse;
-        // } else {
-        //     alert('Ошибка HTTP: ' + resp.status);
-        // }
         return (await resp.json()) as StartStopEngineResponse;
     }
 
     async getDrive(query: { url: string; method: string }) {
-        //const controller = new AbortController();
-        //const signal = controller.signal;
         const resp = await fetch(query.url, { method: query.method });
         if (resp.ok) {
             return (await resp.json()) as DriveResponse;
         } else {
-            //controller.abort();
-            console.log('Ошибка HTTP: ' + resp.status);
+            console.log('Двигатель сломан' + resp.status);
         }
     }
 
     async getRespWinsPage(query: { url: string; method: string }) {
         const resp = await fetch(`${query.url}`, { method: query.method });
-        //return (await resp.json()) as GetWinnersResponse;
         return {
             carsWin: (await resp.json()) as GetWinnersResponse,
             countWin: Number(resp.headers.get('X-Total-Count')),
