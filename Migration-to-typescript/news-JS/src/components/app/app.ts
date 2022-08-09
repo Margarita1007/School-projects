@@ -13,9 +13,12 @@ class App implements AppInterface {
     public start() {
         const sources = document.querySelector('.sources');
         if (sources) {
-            sources.addEventListener('click', (e) =>
-                this.controller.getNews(e, (data: NewsData) => this.view.drawNews(data))
-            );
+            sources.addEventListener('click', (e) => {
+                this.controller.getNews(e, (data: NewsData) => this.view.drawNews(data));
+                sources.classList.add('sources-column');
+                const news = document.querySelector('.news') as HTMLElement;
+                news.classList.add('news-column');
+            });
             this.controller.getSources({ endpoint: EndPoints.sources }, (data: ResponseData) =>
                 this.view.drawSources(data)
             );

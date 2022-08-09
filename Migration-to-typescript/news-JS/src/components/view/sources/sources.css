@@ -8,6 +8,16 @@
     font: 300 1em 'Fira Sans', sans-serif;
 }
 
+.sources-column {
+    position: sticky;
+    top: 50px;
+    width: 500px;
+    flex-direction: column;
+    height: 91vh;
+    margin-top: 15px;
+}
+
+
 .source__item {
     background: none;
     border: 2px solid #30c5ff;
@@ -37,7 +47,7 @@
     width: 10px;
   }
 ::-webkit-scrollbar-thumb {
-    background-color: #188ed3;
+    background-color: #1ba3f1;
     border-radius: 3px;
   }
 ::-webkit-scrollbar-track {
@@ -46,10 +56,14 @@
   }
   
 
-@media (max-width: 810px) {
-    .sources {
+@media (max-width: 768px) {
+    .sources-column {
+        position: static;
+        width: 100%;
         flex-wrap: wrap;
+        flex-direction: row;
         height: 270px;
         justify-content: center;
+        overflow: auto;
     }
 }
