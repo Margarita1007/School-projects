@@ -10,13 +10,11 @@ export class AppView implements AppViewInterface {
         this.sources = new Sources();
     }
 
-    drawNews(data: NewsData) {
-        //const values = data.articles ? data.articles : [];
+    public drawNews(data: NewsData) {
         this.news.draw(data);
     }
 
-    drawSources(data: ResponseData) {
-        //const values = data.sources ? data.sources : [];
+    public drawSources(data: ResponseData) {
         this.sources.draw(data);
     }
 }

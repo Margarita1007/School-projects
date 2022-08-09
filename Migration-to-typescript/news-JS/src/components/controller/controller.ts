@@ -1,38 +1,38 @@
 //import { AppControllerInterface, CBGeneric, ResponseData } from '../types';
+import { AppControllerInterface, EndPoints, Options, CBGeneric, ResponseData, NewsData } from '../types';
 import AppLoader from './appLoader';
 
-class AppController extends AppLoader {
-    getSources(callback) {
-        super.getResp(
-            {
-                endpoint: 'sources',
-            },
-            callback
-        );
+class AppController extends AppLoader implements AppControllerInterface {
+    public getSources(_: { endpoint: EndPoints; options?: Options }, callback: CBGeneric<ResponseData>): void {
+        super.getResp({ endpoint: EndPoints.sources }, callback);
     }
 
-    getNews(e, callback) {
-        let target = e.target;
-        const newsContainer = e.currentTarget;
+    public getNews(e: Event, callback: CBGeneric<NewsData>) {
+        let target = e.target as HTMLElement;
+        const newsContainer = e.currentTarget as HTMLElement;
 
         while (target !== newsContainer) {
-            if (target.classList.contains('source__item')) {
+            if (target?.classList.contains('source__item')) {
                 const sourceId = target.getAttribute('data-source-id');
-                if (newsContainer.getAttribute('data-source') !== sourceId) {
-                    newsContainer.setAttribute('data-source', sourceId);
-                    super.getResp(
-                        {
-                            endpoint: 'everything',
-                            options: {
-                                sources: sourceId,
+                if (sourceId) {
+                    if (newsContainer.getAttribute('data-source') !== sourceId) {
+                        newsContainer.setAttribute('data-source', sourceId);
+                        super.getResp(
+                            {
+                                endpoint: EndPoints.everything,
+                                options: {
+                                    sources: sourceId,
+                                },
                             },
-                        },
-                        callback
-                    );
+                            callback
+                        );
+                    }
+                    return;
                 }
-                return;
             }
-            target = target.parentNode;
+            if (target.parentElement) {
+                target = target.parentElement;
+            }
         }
     }
 }

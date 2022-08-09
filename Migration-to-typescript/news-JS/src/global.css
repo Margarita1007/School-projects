@@ -11,25 +11,86 @@ header {
 header h1 {
     font-size: 40px;
     font-weight: 800;
+    color: #81c2e7;
 }
 
-footer {
-    height: 100px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
 footer .copyright {
     font-size: 14px;
-    color: #333;
+    color: #188ed3;
     text-align: center;
 }
 footer .copyright a {
-    color: #444;
+    color: #81c2e7;
 }
-footer .copyright a:hover {
-    color: #555;
+footer .copyright a:hover,
+.footer-git a:hover {
+    color: #3fcc59;
 }
 footer .copyright:before {
     content: '©';
+}
+
+
+.footer-info {
+    padding-top: 30px;
+    height: 50px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    font-weight: 500;
+    background-size: cover;
+    font-family: 'Ubuntu', sans-serif;
+    text-align: center;
+}
+
+.footer-git, .footer-news, .footer-rss {
+    width: 33%;
+    justify-content: center;
+}
+
+.footer-news {
+    position: relative;
+    height: 100%;
+}
+
+.footer-rss {
+    position: relative;
+    height: 50px;
+    display: flex;
+}
+
+.footer-git {
+    display: flex;
+    flex-direction: row;
+    color: #000;
+}
+
+.footer-git a {
+    text-decoration: none;
+    color: #188ed3;
+}
+
+#git-img {
+    width: 100%;
+    height: 100%;
+    object-fit: scale-down;
+}
+
+#rss-img {
+    position: absolute;
+    object-fit: cover;
+    height: 100%;
+    right: 50px;
+}
+
+@media (max-width: 600px) {
+    .footer-info {
+        flex-direction: column;
+        height: fit-content;
+    }
+    #rss-img {
+        right: 20px;
+    }
+
 }

@@ -7,16 +7,17 @@ class Loader implements LoaderInterface {
         this.options = options;
     }
 
-    getResp(
+    public getResp(
         { endpoint, options }: { endpoint: EndPoints; options?: Options },
-        callback = () => {
+        callback = (response: ResponseData) => {
+            console.log(response.status);
             console.error('No callback for GET response');
         }
     ) {
         this.load('GET', endpoint, callback, options);
     }
 
-    errorHandler(res: Response) {
+    private errorHandler(res: Response) {
         if (!res.ok) {
             if (res.status === 401 || res.status === 404)
                 console.log(`Sorry, but there is ${res.status} error: ${res.statusText}`);
@@ -26,7 +27,7 @@ class Loader implements LoaderInterface {
         return res;
     }
 
-    makeUrl(endpoint: EndPoints, options?: Options) {
+    private makeUrl(endpoint: EndPoints, options?: Options) {
         const urlOptions: Options = { ...this.options, ...options };
         let url = `${this.baseLink}${endpoint}?`;
 
@@ -37,7 +38,7 @@ class Loader implements LoaderInterface {
         return url.slice(0, -1);
     }
 
-    load(method: string, endpoint: EndPoints, callback: CBGeneric<ResponseData>, options: Options = {}) {
+    public load(method: string, endpoint: EndPoints, callback: CBGeneric<ResponseData>, options: Options = {}) {
         fetch(this.makeUrl(endpoint, options), { method })
             .then(this.errorHandler)
             .then((res) => res.json())

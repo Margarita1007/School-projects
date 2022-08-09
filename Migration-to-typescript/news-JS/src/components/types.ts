@@ -64,6 +64,8 @@ export type Options = {
         | 'za';
     readonly sources?: string;
 };
+//type of object for general response
+export type ResponseData = NewsData & SourceData;
 
 // type of object for every article from News
 export type NewsData = {
@@ -84,8 +86,8 @@ export type NewsData = {
     ];
 };
 
-//type of object for initial response data
-export type ResponseData = {
+//type of object for initial sources data
+export type SourceData = {
     status: string;
     sources: [
         {
@@ -111,8 +113,8 @@ export interface LoaderInterface {
     baseLink: string;
     options: Options | Record<string, unknown>;
     getResp({ endpoint, options }: { endpoint: EndPoints; options?: Options }, callback: () => void): void;
-    errorHandler(res: Response): Response;
-    makeUrl(endpoint: EndPoints, options?: Options): string;
+    //errorHandler(res: Response): Response;
+    //makeUrl(endpoint: EndPoints, options?: Options): string;
     load(method: string, endpoint: EndPoints, callback: CBGeneric<ResponseData>, options: Options): void;
 }
 
@@ -129,7 +131,7 @@ export interface NewsInterface {
 }
 
 export interface SourcesInterface {
-    draw(data: ResponseData): void;
+    draw(data: SourceData): void;
     clear(): void;
 }
 
@@ -137,7 +139,7 @@ export interface AppViewInterface {
     news: News;
     sources: Sources;
     drawNews(data: NewsData): void;
-    drawSources(data: ResponseData): void;
+    drawSources(data: SourceData): void;
 }
 
 export interface AppInterface {

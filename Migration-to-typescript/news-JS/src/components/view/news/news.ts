@@ -2,7 +2,7 @@ import { NewsData, NewsInterface } from '../../types';
 import './news.css';
 
 class News implements NewsInterface {
-    draw(data: NewsData) {
+    public draw(data: NewsData) {
         const news = data.articles.length >= 10 ? data.articles.filter((_item, idx) => idx < 10) : data.articles;
         const fragment = document.createDocumentFragment();
         const newsItemTemp = document.querySelector<HTMLTemplateElement>('#newsItemTemp');
@@ -25,7 +25,9 @@ class News implements NewsInterface {
                 }
 
                 if (news__meta_photo) {
-                    news__meta_photo.style.backgroundImage = `url(${item.urlToImage || 'img/news_placeholder.jpg'})`;
+                    news__meta_photo.style.backgroundImage = `url(${
+                        item.urlToImage || 'assets/img/news_placeholder.png'
+                    })`;
                 }
 
                 if (news__meta_author) {

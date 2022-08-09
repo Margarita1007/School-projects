@@ -32,3 +32,24 @@
     font-weight: 400;
     white-space: nowrap;
 }
+
+::-webkit-scrollbar {
+    width: 10px;
+  }
+::-webkit-scrollbar-thumb {
+    background-color: #188ed3;
+    border-radius: 3px;
+  }
+::-webkit-scrollbar-track {
+    background-color: #30c5ff;
+    border-radius: 3px;
+  }
+  
+
+@media (max-width: 810px) {
+    .sources {
+        flex-wrap: wrap;
+        height: 270px;
+        justify-content: center;
+    }
+}

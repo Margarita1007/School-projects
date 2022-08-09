@@ -2,7 +2,7 @@ import './sources.css';
 import { ResponseData, SourcesInterface } from '../../types';
 
 class Sources implements SourcesInterface {
-    draw(data: ResponseData) {
+    public draw(data: ResponseData) {
         const fragment = document.createDocumentFragment();
         const sourceItemTemp = document.querySelector<HTMLTemplateElement>('#sourceItemTemp');
 
@@ -26,7 +26,7 @@ class Sources implements SourcesInterface {
         }
     }
 
-    clear(): void {
+    public clear(): void {
         console.log();
     }
 }
